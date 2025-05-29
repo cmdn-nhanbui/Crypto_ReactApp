@@ -1,9 +1,12 @@
 import { createContext, type ReactNode } from 'react';
 
-const defaultValue = undefined;
+type storageValueProps = {};
+
+const defaultValue: storageValueProps = {};
 
 export const Storage = ({ children }: { children: ReactNode }) => {
-  return <StorageContext.Provider value={undefined}>{children}</StorageContext.Provider>;
+  const value: storageValueProps = {};
+  return <StorageContext.Provider value={value}>{children}</StorageContext.Provider>;
 };
 
 export const StorageContext = createContext(defaultValue);
