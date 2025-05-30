@@ -6,4 +6,5 @@ export const ROUTES = {
   NOT_FOUND: '/404',
   SERVER_ERROR: '/500',
   COIN_DETAIL: '/coin/:id',
+  FAVORITE: '/favorite',
 };

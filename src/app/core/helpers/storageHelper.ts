@@ -1,4 +1,4 @@
-export const KEYS = {
+export const LS_KEYS = {
   ACCESS_TOKEN: 'access_token',
   REFRESH_TOKEN: 'refresh_token',
   TOKEN_TYPE: 'token_type',
@@ -7,9 +7,10 @@ export const KEYS = {
   USER_INFO: 'user_info',
   DRAFT_DATA: 'draft_data',
   CART: 'cart',
+  THEME: 'theme',
 } as const;
 
-export type KeyType = (typeof KEYS)[keyof typeof KEYS];
+export type KeyType = (typeof LS_KEYS)[keyof typeof LS_KEYS];
 
 export const getLS = (key: KeyType) => {
   // TODO: Optimize it

@@ -21,9 +21,7 @@ export const Error = ({
       <div className='notfound-navigate'>
         {navigateTo && (
           <Link to={navigateTo}>
-            <Button rounded outlined>
-              {navigateTitle}
-            </Button>
+            <Button>{navigateTitle}</Button>
           </Link>
         )}
       </div>
