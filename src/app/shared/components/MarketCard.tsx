@@ -55,22 +55,16 @@ const MarketCard: React.FC<MarketCardProps> = ({ value, percentageChange, chartD
   };
 
   return (
-    <div className='p-4 border rounded-xl shadow-xs w-fit bg-[var(--background)] flex gap-8 border-[var(--border-primary)]'>
-      <div className='flex flex-col justify-center'>
-        <div className='text-xl font-semibold text-[var(--text-primary)]'>${formattedValue}</div>
-        <div className='text-sm text-[var(--text-secondary)] font-semibold flex items-center gap-2'>
+    <div className='p-3 border rounded-xl shadow-xs bg-[var(--background)] flex flex-col sm:flex-row border-[var(--border-primary)] w-full'>
+      <div className='col col-7 flex flex-col justify-center'>
+        <div className='text-lg font-semibold text-[var(--text-primary)] leading-[18px]'>${formattedValue}</div>
+        <div className='text-sm text-[var(--text-secondary)] font-semibold flex items-center gap-2 mt-1'>
           Market Cap
           <DeltaBadge value={percentageChange} />
         </div>
       </div>
-      <div className='mt-2 w-full h-[60px]'>
-        <Line
-          style={{
-            width: '100%',
-          }}
-          data={data}
-          options={options}
-        />
+      <div className='col col-5 h-[60px] col-sm-12'>
+        <Line width={'100%'} data={data} options={options} />
       </div>
     </div>
   );

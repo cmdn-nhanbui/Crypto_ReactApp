@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import { Button } from '../../../shared/components/Button';
-import { ROUTES } from '../../../core/constants/routes';
-import type { ErrorProps } from '../../../core/constants/types';
+import { Button } from '@/shared/components/Button';
+import { ROUTES } from '@/core/constants/routes';
+import type { ErrorProps } from '@/core/constants/types';
 
 export const Error = ({
   title,

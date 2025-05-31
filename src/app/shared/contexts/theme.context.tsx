@@ -33,7 +33,7 @@ export const Theme = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={value}>
-      <div className={`${value.theme} ease-in bg-[var(--background)] ease-all`}>{children}</div>
+      <div className={`app ${value.theme} bg-[var(--background)] ease-all`}>{children}</div>
     </ThemeContext.Provider>
   );
 };
