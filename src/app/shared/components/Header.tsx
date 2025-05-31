@@ -104,22 +104,22 @@ export const Header = ({}) => {
           </Link>
           <div className='flex justify-between flex-1'>
             <nav className='items-center ml-8 gap-8 hidden lg:flex'>
-              <Link to='/' className=' text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
+              <Link to='/' className='text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
                 Cryptocurrencies
               </Link>
-              <Link to='/' className=' text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
+              <Link to='/' className='text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
                 Exchanges
               </Link>
-              <Link to='/' className=' text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
+              <Link to='/' className='text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
                 NFT
               </Link>
-              <Link to='/' className=' text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
+              <Link to='/' className='text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
                 Learn
               </Link>
-              <Link to='/' className=' text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
+              <Link to='/' className='text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
                 Products
               </Link>
-              <Link to='/' className=' text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
+              <Link to='/' className='text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
                 API
               </Link>
             </nav>

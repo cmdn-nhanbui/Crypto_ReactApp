@@ -19,3 +19,11 @@ export type ShowToastOptions = Omit<Toast, 'id'>;
 export type ToastContextType = {
   showToast: ({ type, message, duration }: ShowToastOptions) => void;
 };
+
+export interface ErrorProps {
+  status: number;
+  title: string;
+  description: string;
+  navigateTo?: string | false;
+  navigateTitle?: string;
+}
