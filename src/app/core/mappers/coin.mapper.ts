@@ -2,6 +2,7 @@ import type { CoinProps } from '@/pages/home/components/CoinRow';
 
 export const mapApiCoinToComponent = (coinData: any): CoinProps => {
   return {
+    id: coinData?.id,
     name: coinData?.name,
     symbol: coinData?.symbol,
     price: coinData?.current_price,

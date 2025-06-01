@@ -10,19 +10,50 @@ import Pagination from '@/shared/components/Pagination';
 
 // import { exampleData } from '../data/coin.data';
 import { type CoinProps, CoinRow } from './CoinRow';
-import { useTheme } from '@/shared/hooks/useTheme';
 import { getCoinsData } from '@/core/services/coin.service';
+import { useTheme } from '@/shared/hooks/useTheme';
 
-type SortKey =
-  | 'title'
-  | 'price'
-  | 'change1h'
-  | 'change24h'
-  | 'change7d'
-  | 'change30d'
-  | 'volume24h'
-  | 'marketCap'
-  | 'marketCapFdvRatio';
+type SortKey = (typeof tabelFields)[number]['id'];
+
+const tabelFields = [
+  {
+    name: 'Coin',
+    id: 'coin_name',
+  },
+  {
+    name: 'Price',
+    id: 'volume',
+  },
+  {
+    name: '1h',
+    id: '1h_volume_change',
+  },
+  {
+    name: '24h',
+    id: '24h_change',
+  },
+  {
+    name: '7d',
+    id: '7d_volume_change',
+  },
+  {
+    name: '30d',
+  },
+  {
+    name: '24h Volume',
+    id: '24h_volume',
+  },
+  {
+    name: 'Market Cap',
+    id: 'market_cap',
+  },
+  {
+    name: 'Market Cap/FDV',
+  },
+  {
+    name: 'Last 7 Days',
+  },
+];
 
 type SortConfig = {
   key: SortKey;
@@ -37,7 +68,7 @@ export const CoinTabel = () => {
   const [coins, setCoins] = useState<CoinProps[]>([]);
 
   const [sortConfig, setSortConfig] = useState<SortConfig>({
-    key: 'marketCap',
+    key: 'price',
     direction: 'desc',
   });
 
@@ -56,7 +87,7 @@ export const CoinTabel = () => {
   };
 
   const fetchData = () => {
-    getCoinsData({ page, perPage })
+    getCoinsData({ page, perPage, sortBy: `${sortConfig.key}_${sortConfig.direction}` })
       .then((res) => {
         const data = res?.map(mapApiCoinToComponent);
         setCoins(data);
@@ -71,7 +102,7 @@ export const CoinTabel = () => {
     fetchData();
     // const data = mapApiCoinToComponent(exampleData);
     // setCoins([data]);
-  }, [page, perPage]);
+  }, [page, perPage, sortConfig]);
 
   const getArrow = (key: SortKey) => {
     if (sortConfig.key !== key) return <CaretDownOutlined />;
@@ -85,55 +116,15 @@ export const CoinTabel = () => {
           <tr>
             <th></th>
             <th>#</th>
-            <th className='cursor-pointer px-6 py-3 text-left text-sm font-medium' onClick={() => handleSort('title')}>
-              Coin {getArrow('title')}
-            </th>
-            <th className='cursor-pointer px-6 py-3 text-left text-sm font-medium' onClick={() => handleSort('price')}>
-              Price {getArrow('price')}
-            </th>
-            <th
-              className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
-              onClick={() => handleSort('change1h')}
-            >
-              1h {getArrow('change1h')}
-            </th>
-            <th
-              className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
-              onClick={() => handleSort('change24h')}
-            >
-              24h {getArrow('change24h')}
-            </th>
-            <th
-              className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
-              onClick={() => handleSort('change7d')}
-            >
-              7d {getArrow('change7d')}
-            </th>
-            <th
-              className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
-              onClick={() => handleSort('change30d')}
-            >
-              30d {getArrow('change30d')}
-            </th>
-            <th
-              className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
-              onClick={() => handleSort('volume24h')}
-            >
-              24h Volume {getArrow('volume24h')}
-            </th>
-            <th
-              className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
-              onClick={() => handleSort('marketCap')}
-            >
-              Market Cap {getArrow('marketCap')}
-            </th>
-            <th
-              className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
-              onClick={() => handleSort('marketCapFdvRatio')}
-            >
-              Market Cap / FDV {getArrow('marketCapFdvRatio')}
-            </th>
-            <th>Last 7 Days</th>
+            {tabelFields?.map((field, index) => (
+              <th
+                key={index}
+                className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
+                onClick={() => handleSort(field.id)}
+              >
+                {field.name} {field?.id && getArrow(field?.id)}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody className='divide-y divide-gray-200'>

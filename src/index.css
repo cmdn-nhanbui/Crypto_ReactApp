@@ -2,9 +2,13 @@
 @import 'tailwindcss';
 @import './stylesheet/css/grid.css';
 
-/* reset CSS */
-* {
+html {
   box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 html,

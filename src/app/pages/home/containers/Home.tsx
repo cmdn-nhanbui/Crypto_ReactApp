@@ -3,7 +3,7 @@ import { CoinItem } from '@/shared/components/CoinItem';
 import MarketCard from '@/shared/components/MarketCard';
 import { CoinTabel } from '../components/CoinTabel';
 
-function generateFakeChartData(length: number = 500, startPrice: number = 100): number[] {
+export function generateFakeChartData(length: number = 500, startPrice: number = 100): number[] {
   const data: number[] = [startPrice];
 
   for (let i = 1; i < length; i++) {

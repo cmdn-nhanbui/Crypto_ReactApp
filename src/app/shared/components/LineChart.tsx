@@ -37,9 +37,5 @@ export const LineChart = ({ chartData, isIncrease }: Props) => {
       },
     ],
   };
-  return (
-    <div className='w-[135px] max-h-[50px]'>
-      <Line width={'100%'} data={data} options={options} />
-    </div>
-  );
+  return <Line width={'100%'} data={data} options={options} />;
 };

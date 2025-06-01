@@ -19,3 +19,8 @@ export const getCoinById = async (id: string) => {
   const response = await request.get(`/coins/${id}`);
   return response?.data;
 };
+
+export const getCoinHistory = async (id: string) => {
+  const response = await request.get(`/v3/coins/${id}/market_chart?vs_currency=usd&days=7`);
+  return response?.data;
+};

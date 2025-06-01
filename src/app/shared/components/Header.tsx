@@ -102,7 +102,7 @@ export const Header = ({}) => {
               <img src={theme === 'light' ? logo : logoDark} className='h-full' alt='logo' />
             </h1>
           </Link>
-          <div className='flex justify-between flex-1'>
+          <div className='flex justify-between flex-1 w-full'>
             <nav className='items-center ml-8 gap-8 hidden lg:flex'>
               <Link to='/' className='text-[var(--text-primary)] hover:text-[var(--green-primary)]'>
                 Cryptocurrencies
@@ -124,8 +124,8 @@ export const Header = ({}) => {
               </Link>
             </nav>
 
-            <div className='flex items-center gap-2 text-[var(--text-primary)] sm:flex-row flex-row-reverse flex-1 sm:flex-none'>
-              <Link to={ROUTES.FAVORITE}>
+            <div className='flex items-center gap-2 text-[var(--text-primary)] sm:flex-row flex-row-reverse flex-1 sm:flex-none sm:w-fit w-full'>
+              <Link className='flex' to={ROUTES.FAVORITE}>
                 <StarFilled className='mr-1 !text-amber-300' />
                 Favorite
               </Link>
