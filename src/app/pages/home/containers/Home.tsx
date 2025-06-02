@@ -2,6 +2,7 @@ import { Card } from '@/shared/components/Card';
 import { CoinItem } from '@/shared/components/CoinItem';
 import MarketCard from '@/shared/components/MarketCard';
 import { CoinTabel } from '../components/CoinTabel';
+import { useEffect } from 'react';
 
 export function generateFakeChartData(length: number = 500, startPrice: number = 100): number[] {
   const data: number[] = [startPrice];
@@ -18,6 +19,10 @@ export function generateFakeChartData(length: number = 500, startPrice: number =
 }
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const fakeData1 = generateFakeChartData(200, 100);
   const fakeData2 = generateFakeChartData(200, 100);
   return (

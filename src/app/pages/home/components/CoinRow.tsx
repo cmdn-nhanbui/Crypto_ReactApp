@@ -1,7 +1,9 @@
+import type { FavoriteCoin } from '@/core/constants/types';
 import { DeltaBadge } from '@/shared/components/DeltaBadge';
 import { LineChart } from '@/shared/components/LineChart';
+import { useStorage } from '@/shared/hooks/useStorage';
 import { StarFilled, StarOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 export type CoinProps = {
@@ -22,11 +24,37 @@ export type CoinProps = {
 
 export const CoinRow = ({ index, data }: { index: number; data: CoinProps }) => {
   const ratioMarketCap = data?.marketCap / data?.fullyDilutedValuation;
-  const [isLiked, setIsLiked] = useState<boolean>(false);
   const isIncreaseInWeek = data?.percentWeekChange > 0;
+  const { favoriteCoins, setFavoriteCoins } = useStorage();
+
+  const isLiked = useMemo(() => favoriteCoins?.some((item) => item?.id === data?.id), [favoriteCoins]);
 
   const handleAddToFavorite = () => {
-    setIsLiked(!isLiked);
+    /// logic
+    setFavoriteCoins((prev) => {
+      let newState = [...prev];
+      const isExistedCoin = newState?.some((item) => item?.id === data?.id);
+
+      if (!isExistedCoin) {
+        const newFavoriteCoin: FavoriteCoin = {
+          id: data?.id,
+          name: data?.name,
+          thumbnail: data?.thumbnail,
+          changePercentage1h: data?.percentOneHourChange,
+          changePercentage7d: data?.percentWeekChange,
+          changePercentage24h: data?.percentDayChange,
+          changePercentage30d: data?.percentMonthChange,
+          price: data?.price,
+          volume: data?.volume,
+          marketCap: data?.marketCap,
+        };
+        newState.push(newFavoriteCoin);
+      } else {
+        newState = newState?.filter((item) => item?.id !== data?.id);
+      }
+
+      return newState;
+    });
   };
 
   return (

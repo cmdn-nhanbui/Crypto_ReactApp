@@ -8,6 +8,7 @@ export const LS_KEYS = {
   DRAFT_DATA: 'draft_data',
   CART: 'cart',
   THEME: 'theme',
+  FAV_COINS: 'fav_coins',
 } as const;
 
 export type KeyType = (typeof LS_KEYS)[keyof typeof LS_KEYS];

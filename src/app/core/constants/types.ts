@@ -27,3 +27,45 @@ export interface ErrorProps {
   navigateTo?: string | false;
   navigateTitle?: string;
 }
+
+export interface CoinDetailData {
+  id: string;
+  symbol: string;
+  name: string;
+  thumbnail: string;
+  currentPrice: number;
+  currentPriceBTC: number;
+  currentPriceETH: number;
+  change24hUSD: number;
+  change24hBTC: number;
+  change24hETH: number;
+  marketCap: number;
+  fullyDilutedValuation: number;
+  circulatingSupply: number;
+  totalSupply: number;
+  maxSupply: number;
+  changePercentage1h: number;
+  changePercentage24h: number;
+  changePercentage7d: number;
+  changePercentage14d: number;
+  changePercentage30d: number;
+  changePercentage1y: number;
+  volume: number;
+}
+
+export type CoinHistory = { timeStamps: number[]; prices: number[] };
+
+export type TimeRangeType = '1h' | '24h' | '7d';
+
+export type FavoriteCoin = {
+  id: string;
+  name: string;
+  thumbnail: string;
+  price: number;
+  changePercentage1h: number;
+  changePercentage24h: number;
+  changePercentage7d: number;
+  changePercentage30d: number;
+  volume: number;
+  marketCap: number;
+};
