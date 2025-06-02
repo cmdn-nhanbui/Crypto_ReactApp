@@ -27,6 +27,7 @@ export const Storage = ({ children }: { children: ReactNode }) => {
 
   const loadCartFromLocalStorage = (): void => {
     const cartValue = getLS(LS_KEYS.FAV_COINS);
+
     if (cartValue) {
       try {
         const localCartData: FavoriteCoin[] = JSON.parse(cartValue);

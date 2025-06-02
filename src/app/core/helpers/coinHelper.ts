@@ -18,6 +18,12 @@ export function formatTimeStamp(timestamp: number) {
   };
 }
 
-export function formatUSPrice(price: number): string {
-  return price.toLocaleString('en-US', {});
+export function formatUSPrice(price: unknown): string {
+  if (typeof price !== 'number' || isNaN(price)) {
+    return '-';
+  }
+
+  return price.toLocaleString('en-US', {
+    maximumFractionDigits: 2,
+  });
 }

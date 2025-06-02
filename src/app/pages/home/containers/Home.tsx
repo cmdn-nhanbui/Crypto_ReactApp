@@ -26,7 +26,7 @@ const Home = () => {
   const fakeData1 = generateFakeChartData(200, 100);
   const fakeData2 = generateFakeChartData(200, 100);
   return (
-    <div className='container min-h-[calc(100vh-120px)] pt-8 '>
+    <div className='container min-h-[calc(100vh-120px)] pt-4 '>
       <div className='row'>
         <div className='col col-4 flex flex-col gap-4 col-sm-12 h-full'>
           <MarketCard value={3508168481385} percentageChange={-3.1} chartData={fakeData1} />
@@ -78,7 +78,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='mt-6'>
+      <div className='mt-2 sm:mt-4'>
         <CoinTabel />
       </div>
     </div>

@@ -23,7 +23,9 @@ export const Theme = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const theme = getLS(LS_KEYS.THEME);
+
     if (theme === 'dark' || theme === 'light') return setTheme(theme);
+
     setTheme('light');
   }, []);
 

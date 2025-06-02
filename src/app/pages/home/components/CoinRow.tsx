@@ -1,4 +1,5 @@
 import type { FavoriteCoin } from '@/core/constants/types';
+import { formatUSPrice } from '@/core/helpers/coinHelper';
 import { DeltaBadge } from '@/shared/components/DeltaBadge';
 import { LineChart } from '@/shared/components/LineChart';
 import { useStorage } from '@/shared/hooks/useStorage';
@@ -27,7 +28,7 @@ export const CoinRow = ({ index, data }: { index: number; data: CoinProps }) => 
   const isIncreaseInWeek = data?.percentWeekChange > 0;
   const { favoriteCoins, setFavoriteCoins } = useStorage();
 
-  const isLiked = useMemo(() => favoriteCoins?.some((item) => item?.id === data?.id), [favoriteCoins]);
+  const isLiked = favoriteCoins?.some((item) => item?.id === data?.id);
 
   const handleAddToFavorite = () => {
     /// logic
@@ -83,7 +84,7 @@ export const CoinRow = ({ index, data }: { index: number; data: CoinProps }) => 
         </Link>
       </td>
 
-      <td className='text-center px-1 py-2.5 bg-inherit'>${data?.price}</td>
+      <td className='text-center px-1 py-2.5 bg-inherit'>${formatUSPrice(data?.price)}</td>
       <td className='text-center px-1 py-2.5 bg-inherit'>
         <DeltaBadge value={data?.percentOneHourChange} />
       </td>
@@ -96,9 +97,9 @@ export const CoinRow = ({ index, data }: { index: number; data: CoinProps }) => 
       <td className='text-center d30 px-1 py-2.5 bg-inherit'>
         <DeltaBadge value={data?.percentMonthChange} />
       </td>
-      <td className='text-center px-1 py-2.5 bg-inherit'>${data?.volume}</td>
-      <td className='text-center px-1 py-2.5 bg-inherit'>${data?.marketCap}</td>
-      <td className='text-center ratio px-1 py-2.5 bg-inherit'>{ratioMarketCap.toFixed(2)}</td>
+      <td className='text-center px-1 py-2.5 bg-inherit'>${formatUSPrice(data?.volume)}</td>
+      <td className='text-center px-1 py-2.5 bg-inherit'>${formatUSPrice(data?.marketCap)}</td>
+      <td className='text-center ratio px-1 py-2.5 bg-inherit'>{ratioMarketCap.toFixed(1)}</td>
       <td className='text-center box-content h-[56px] px-1 py-2.5 bg-inherit'>
         <div className='w-[135px] max-h-[50px]'>
           <LineChart chartData={data?.sparkline} isIncrease={isIncreaseInWeek} />
