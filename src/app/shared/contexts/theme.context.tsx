@@ -1,5 +1,5 @@
-import { getLS, LS_KEYS, setLS } from '@/core/helpers/storageHelper';
 import { createContext, useEffect, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
+import { getLS, LS_KEYS, setLS } from '@/core/helpers/storage.helper';
 
 type THEME_MODE = 'dark' | 'light';
 

@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export const TOAST_TYPES = {
   SUCCESS: 'success',
   ERROR: 'error',
@@ -68,4 +70,60 @@ export type FavoriteCoin = {
   changePercentage30d: number;
   volume: number;
   marketCap: number;
+};
+
+export type ChartProps = {
+  coinData?: CoinDetailData;
+};
+
+export const TIME_MODES = [
+  {
+    name: '1h',
+    id: '1h',
+  },
+  {
+    name: '24h',
+    id: '24h',
+  },
+  {
+    name: '7d',
+    id: '7d',
+  },
+];
+
+export type TimeManagementProps = {
+  value: (typeof TIME_MODES)[number]['id'];
+  onChange?: (id: string) => void;
+};
+
+export type ButtonProps = {
+  children: ReactNode;
+  icon?: ReactNode;
+  onClick?: () => void;
+  className?: string;
+  color?: 'primary' | 'warning' | 'secondary' | 'yellow';
+  disable?: boolean;
+};
+
+export type DeltaBadgeProps = {
+  value: number;
+  className?: string;
+};
+
+export type LineChartProps = {
+  chartData: number[];
+  isIncrease: boolean;
+};
+
+export type MarketCardProps = {
+  value: number;
+  percentageChange: number;
+  chartData: number[];
+};
+
+export type SkeletonProps = {
+  width?: string;
+  height?: string;
+  rounded?: boolean;
+  className?: string;
 };

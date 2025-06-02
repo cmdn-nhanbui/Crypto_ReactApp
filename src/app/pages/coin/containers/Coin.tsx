@@ -1,11 +1,12 @@
-import { Sidebar } from '../components/Sidebar';
-
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getCoinById } from '@/core/services/coin.service';
+
 import { type CoinDetailData } from '@/core/constants/types';
-import { mapCoinDetailData } from '@/core/mappers/coin.mapper';
+import { Sidebar } from '../components/Sidebar';
 import { Chart } from '../components/Chart';
+
+import { mapCoinDetailData } from '@/core/mappers/coin.mapper';
+import { getCoinById } from '@/core/services/coin.service';
 import { ROUTES } from '@/core/constants/routes';
 
 const Coin = () => {

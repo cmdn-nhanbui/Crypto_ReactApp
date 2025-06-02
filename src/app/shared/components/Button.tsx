@@ -1,14 +1,5 @@
 import clsx from 'clsx';
-import type { ReactNode } from 'react';
-
-type ButtonProps = {
-  children: ReactNode;
-  icon?: ReactNode;
-  onClick?: () => void;
-  className?: string;
-  color?: 'primary' | 'warning' | 'secondary' | 'yellow';
-  disable?: boolean;
-};
+import type { ButtonProps } from '@/core/constants/types';
 
 const colorData = {
   primary: 'bg-[var(--green-primary)]  border-[var(--green-primary)] text-white hover:bg-[#35af00]',

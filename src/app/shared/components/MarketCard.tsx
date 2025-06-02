@@ -9,15 +9,11 @@ import {
   Tooltip,
   type ChartOptions,
 } from 'chart.js';
+
 import { DeltaBadge } from './DeltaBadge';
+import type { MarketCardProps } from '@/core/constants/types';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip);
-
-type MarketCardProps = {
-  value: number;
-  percentageChange: number;
-  chartData: number[];
-};
 
 const MarketCard: React.FC<MarketCardProps> = ({ value, percentageChange, chartData }) => {
   const formattedValue = value.toLocaleString('de-DE');

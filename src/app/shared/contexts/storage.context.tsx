@@ -1,6 +1,6 @@
-import type { FavoriteCoin } from '@/core/constants/types';
-import { getLS, LS_KEYS, setLS } from '@/core/helpers/storageHelper';
 import { createContext, useEffect, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
+import type { FavoriteCoin } from '@/core/constants/types';
+import { getLS, LS_KEYS, setLS } from '@/core/helpers/storage.helper';
 
 type storageValueProps = {
   favoriteCoins: FavoriteCoin[];

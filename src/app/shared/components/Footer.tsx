@@ -1,7 +1,9 @@
-import { ROUTES } from '@/core/constants/routes';
 import { Link } from 'react-router-dom';
+
 import { Button } from './Button';
+import { ROUTES } from '@/core/constants/routes';
 import { useTheme } from '../hooks/useTheme';
+
 import logo from '@assets/coingecko-1.svg';
 import logoDrark from '@assets/coingecko-dark.svg';
 

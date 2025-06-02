@@ -1,17 +1,13 @@
 import { type FavoriteCoin } from '@/core/constants/types';
-import { formatUSPrice } from '@/core/helpers/coinHelper';
-import { sortFavoriteCoins } from '@/core/helpers/favoriteCoinHelper';
-import { getPaginationData } from '@/core/helpers/paginationHelper';
+import { formatUSPrice } from '@/core/helpers/coin.helper';
+import { sortFavoriteCoins } from '@/core/helpers/favoriteCoin.helper';
+import { getPaginationData } from '@/core/helpers/pagination.helper';
 import { type SortConfig, type SortKey } from '@/pages/home/components/CoinTabel';
 import { DeltaBadge } from '@/shared/components/DeltaBadge';
-import { MenuItem } from '@/shared/components/Menu/MenuItem';
-import { MenuWrapper } from '@/shared/components/Menu/MenuWrapper';
 import Pagination from '@/shared/components/Pagination';
 import { PerPageSelector } from '@/shared/components/PerPageSelector';
 import { useStorage } from '@/shared/hooks/useStorage';
-import { useTheme } from '@/shared/hooks/useTheme';
 import { CaretDownOutlined, CaretUpOutlined, StarFilled } from '@ant-design/icons';
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -54,8 +50,6 @@ const Favorite = () => {
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(10);
   const totalPage = Math.ceil(favoriteCoins?.length / perPage);
-
-  const { theme } = useTheme();
 
   const getArrow = (key: SortKey) => {
     if (sortConfig.key !== key) return <CaretDownOutlined />;

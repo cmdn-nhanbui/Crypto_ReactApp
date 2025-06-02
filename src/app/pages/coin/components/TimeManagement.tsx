@@ -1,26 +1,7 @@
 import { useState } from 'react';
+import { TIME_MODES, type TimeManagementProps } from '@/core/constants/types';
 
-type Props = {
-  value: (typeof TIME_MODES)[number]['id'];
-  onChange?: (id: string) => void;
-};
-
-const TIME_MODES = [
-  {
-    name: '1h',
-    id: '1h',
-  },
-  {
-    name: '24h',
-    id: '24h',
-  },
-  {
-    name: '7d',
-    id: '7d',
-  },
-];
-
-export const TimeManagement = ({ onChange, value }: Props) => {
+export const TimeManagement = ({ onChange, value }: TimeManagementProps) => {
   const [mode, setMode] = useState<string>(value || '24h');
   const handleChangeMode = (id: string) => {
     setMode(id);

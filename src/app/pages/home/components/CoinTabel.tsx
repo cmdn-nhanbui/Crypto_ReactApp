@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import { mapApiCoinToComponent } from '@/core/mappers/coin.mapper';
 
-import Pagination from '@/shared/components/Pagination';
-
-import { type CoinProps, CoinRow } from './CoinRow';
-import { getCoinsData } from '@/core/services/coin.service';
-import { TableBodySkeleton } from './TableSkeleton';
 import { PerPageSelector } from '@/shared/components/PerPageSelector';
+import Pagination from '@/shared/components/Pagination';
+import { TableBodySkeleton } from './TableSkeleton';
+import { type CoinProps, CoinRow } from './CoinRow';
+
+import { mapApiCoinToComponent } from '@/core/mappers/coin.mapper';
+import { getCoinsData } from '@/core/services/coin.service';
 
 export type SortKey = (typeof tabelFields)[number]['id'];
 
