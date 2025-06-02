@@ -1,6 +1,7 @@
-import { Line } from 'react-chartjs-2';
-import { coinHistory, coinHistoryOneDay } from '../data/data.sample';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
+import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   LineElement,
@@ -12,14 +13,14 @@ import {
   Legend,
   type ChartOptions,
 } from 'chart.js';
-import { formatUSPrice } from '@/core/helpers/coinHelper';
-import { TimeManagement } from '../components/TimeManagement';
 
-import type { CoinDetailData, CoinHistory, TimeRangeType } from '@/core/constants/types';
-import { useEffect, useState } from 'react';
-import { formatDays, formatHours } from '@/core/helpers/timeHelper';
+import type { ChartProps, CoinHistory, TimeRangeType } from '@/core/constants/types';
+import { TimeManagement } from '../components/TimeManagement';
 import { DeltaBadge } from '@/shared/components/DeltaBadge';
-import { useParams } from 'react-router-dom';
+
+import { coinHistory, coinHistoryOneDay } from '../data/data.sample';
+import { formatUSPrice } from '@/core/helpers/coin.helper';
+import { formatDays, formatHours } from '@/core/helpers/time.helper';
 import { getCoinHistory } from '@/core/services/coin.service';
 
 ChartJS.register(
@@ -45,10 +46,6 @@ const getSampleData = (timeRange: TimeRangeType) => {
   });
 
   return { timeStamps, prices };
-};
-
-export type ChartProps = {
-  coinData?: CoinDetailData;
 };
 
 const timeRanges = {

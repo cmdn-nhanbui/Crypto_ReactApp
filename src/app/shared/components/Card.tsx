@@ -1,6 +1,6 @@
-import { RightOutlined } from '@ant-design/icons';
 import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { RightOutlined } from '@ant-design/icons';
 
 type Props = {
   children: ReactNode;

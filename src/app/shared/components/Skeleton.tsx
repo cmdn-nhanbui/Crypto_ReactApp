@@ -1,12 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-
-interface SkeletonProps {
-  width?: string;
-  height?: string;
-  rounded?: boolean;
-  className?: string;
-}
+import type { SkeletonProps } from '@/core/constants/types';
 
 export const Skeleton: React.FC<SkeletonProps> = ({
   width = 'w-full',

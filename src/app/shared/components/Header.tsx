@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
-
-import logo from '@assets/coingecko-1.svg';
-import logoDark from '@assets/coingecko-dark.svg';
+import { MoonOutlined, StarFilled, SunOutlined } from '@ant-design/icons';
 
 import { DeltaBadge } from './DeltaBadge';
 import { Button } from './Button';
-import { MoonOutlined, StarFilled, SunOutlined } from '@ant-design/icons';
+
 import { ROUTES } from '@/core/constants/routes';
 import { Search } from '@/shared/components/Search';
 import { useTheme } from '../hooks/useTheme';
+
+import logo from '@assets/coingecko-1.svg';
+import logoDark from '@assets/coingecko-dark.svg';
 
 export const Header = ({}) => {
   const { theme, setTheme } = useTheme();

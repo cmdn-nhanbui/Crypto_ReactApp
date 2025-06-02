@@ -1,11 +1,8 @@
 import React from 'react';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-type Props = {
-  value: number;
-  className?: string;
-};
+import type { DeltaBadgeProps } from '@/core/constants/types';
 
-export const DeltaBadge: React.FC<Props> = ({ value, className }) => {
+export const DeltaBadge: React.FC<DeltaBadgeProps> = ({ value, className }) => {
   const isPositive = value >= 0;
   const color = isPositive ? 'text-green-500' : 'text-red-500';
   const arrow = isPositive ? <CaretUpOutlined /> : <CaretDownOutlined />;

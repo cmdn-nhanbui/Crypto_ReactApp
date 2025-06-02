@@ -1,8 +1,9 @@
+import { useEffect } from 'react';
+
 import { Card } from '@/shared/components/Card';
 import { CoinItem } from '@/shared/components/CoinItem';
 import MarketCard from '@/shared/components/MarketCard';
 import { CoinTabel } from '../components/CoinTabel';
-import { useEffect } from 'react';
 
 export function generateFakeChartData(length: number = 500, startPrice: number = 100): number[] {
   const data: number[] = [startPrice];

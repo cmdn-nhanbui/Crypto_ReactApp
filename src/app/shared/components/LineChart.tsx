@@ -1,12 +1,8 @@
 import type { ChartOptions } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import type { LineChartProps } from '@/core/constants/types';
 
-type Props = {
-  chartData: number[];
-  isIncrease: boolean;
-};
-
-export const LineChart = ({ chartData, isIncrease }: Props) => {
+export const LineChart = ({ chartData, isIncrease }: LineChartProps) => {
   const options: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,

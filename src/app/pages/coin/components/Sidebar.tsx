@@ -1,10 +1,12 @@
-import type { CoinDetailData, FavoriteCoin } from '@/core/constants/types';
-import { formatUSPrice } from '@/core/helpers/coinHelper';
-import { Button } from '@/shared/components/Button';
-import { DeltaBadge } from '@/shared/components/DeltaBadge';
-import { useStorage } from '@/shared/hooks/useStorage';
 import { StarFilled, StarOutlined } from '@ant-design/icons';
+
 import { SideBarSkeleton } from './SideBarSkeleton';
+import { DeltaBadge } from '@/shared/components/DeltaBadge';
+import { Button } from '@/shared/components/Button';
+
+import type { CoinDetailData, FavoriteCoin } from '@/core/constants/types';
+import { formatUSPrice } from '@/core/helpers/coin.helper';
+import { useStorage } from '@/shared/hooks/useStorage';
 
 export const Sidebar = ({ data, isLoading = true }: { data?: CoinDetailData; isLoading: boolean }) => {
   const { favoriteCoins, setFavoriteCoins } = useStorage();

@@ -1,11 +1,12 @@
-import type { FavoriteCoin } from '@/core/constants/types';
-import { formatUSPrice } from '@/core/helpers/coinHelper';
-import { DeltaBadge } from '@/shared/components/DeltaBadge';
-import { LineChart } from '@/shared/components/LineChart';
-import { useStorage } from '@/shared/hooks/useStorage';
-import { StarFilled, StarOutlined } from '@ant-design/icons';
-import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+
+import { LineChart } from '@/shared/components/LineChart';
+import { StarFilled, StarOutlined } from '@ant-design/icons';
+
+import type { FavoriteCoin } from '@/core/constants/types';
+import { formatUSPrice } from '@/core/helpers/coin.helper';
+import { DeltaBadge } from '@/shared/components/DeltaBadge';
+import { useStorage } from '@/shared/hooks/useStorage';
 
 export type CoinProps = {
   id: string;

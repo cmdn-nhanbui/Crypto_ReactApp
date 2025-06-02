@@ -1,4 +1,4 @@
-import { formatTimeStamp } from './coinHelper';
+import { formatTimeStamp } from './coin.helper';
 
 export const formatHours = (timestamp: number): string => {
   const { hours, minutes } = formatTimeStamp(timestamp);
