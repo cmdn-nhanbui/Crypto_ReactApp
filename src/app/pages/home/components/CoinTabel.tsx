@@ -1,21 +1,18 @@
 import { useState, useEffect } from 'react';
 
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
-
 import { mapApiCoinToComponent } from '@/core/mappers/coin.mapper';
-import { MenuItem } from '@/shared/components/Menu/MenuItem';
-import { MenuWrapper } from '@/shared/components/Menu/MenuWrapper';
+
 import Pagination from '@/shared/components/Pagination';
 
-// import { exampleData } from '../data/coin.data';
 import { type CoinProps, CoinRow } from './CoinRow';
 import { getCoinsData } from '@/core/services/coin.service';
-import { useTheme } from '@/shared/hooks/useTheme';
+import { TableBodySkeleton } from './TableSkeleton';
+import { PerPageSelector } from '@/shared/components/PerPageSelector';
 
-type SortKey = (typeof tabelFields)[number]['id'];
+export type SortKey = (typeof tabelFields)[number]['id'];
 
-const tabelFields = [
+export const tabelFields = [
   {
     name: 'Coin',
     id: 'coin_name',
@@ -55,15 +52,18 @@ const tabelFields = [
   },
 ];
 
-type SortConfig = {
+export type SortConfig = {
   key: SortKey;
   direction: 'asc' | 'desc';
 };
 
+const TOTAL_RECORD = 17241;
+
 export const CoinTabel = () => {
-  const { theme } = useTheme();
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(50);
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [coins, setCoins] = useState<CoinProps[]>([]);
 
@@ -87,6 +87,7 @@ export const CoinTabel = () => {
   };
 
   const fetchData = () => {
+    setIsLoading(true);
     getCoinsData({ page, perPage, sortBy: `${sortConfig.key}_${sortConfig.direction}` })
       .then((res) => {
         const data = res?.map(mapApiCoinToComponent);
@@ -94,7 +95,8 @@ export const CoinTabel = () => {
       })
       .catch((err) => {
         console.error(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -110,61 +112,48 @@ export const CoinTabel = () => {
   };
 
   return (
-    <div>
-      <table className='min-w-full table-auto'>
-        <thead className='bg-[var(--background-secondary)] text-[var(--text-primary)]'>
-          <tr>
-            <th></th>
-            <th>#</th>
-            {tabelFields?.map((field, index) => (
-              <th
-                key={index}
-                className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
-                onClick={() => handleSort(field.id)}
-              >
-                {field.name} {field?.id && getArrow(field?.id)}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className='divide-y divide-gray-200'>
-          {coins?.map((item, index) => (
-            <CoinRow key={index} index={index + 1} data={item} />
-          ))}
-        </tbody>
-      </table>
+    <>
+      <div className='sm:hidden my-2 justify-end flex'>
+        <PerPageSelector perPage={perPage} onChange={handleChangePerPage} options={[50, 100, 300]} />
+      </div>
+      <div className='overflow-x-auto'>
+        <table className='w-full'>
+          <thead className='bg-[var(--background-secondary)] text-[var(--text-primary)]'>
+            <tr>
+              <th></th>
+              <th>#</th>
+              {tabelFields?.map((field, index) => (
+                <th
+                  key={index}
+                  className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
+                  onClick={() => handleSort(field.id)}
+                >
+                  {field.name} {field?.id && getArrow(field?.id)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className='divide-y divide-gray-200'>
+            {isLoading ? (
+              <TableBodySkeleton />
+            ) : (
+              coins?.map((item, index) => <CoinRow key={index} index={index + 1} data={item} />)
+            )}
+          </tbody>
+        </table>
+      </div>
 
       <div className='flex items-center sm:justify-between justify-center my-4'>
         <div></div>
-        <Pagination currentPage={page} totalPages={20} onPageChange={handleChangePage} />
-
-        <Popover className='sm:block hidden'>
-          <span className='text-xs text-[var(--text-secondary)] mr-2'>Row</span>
-          <PopoverButton
-            style={{
-              outline: 'none',
-            }}
-          >
-            <div className='flex items-center'>
-              <div className='min-w-20 text-[var(--text-primary)] py-1.5 px-2.5 rounded-lg font-semibold bg-[var(--background-secondary)] cursor-pointer'>
-                <span className='mr-2'>{perPage}</span>
-                <CaretDownOutlined />
-              </div>
-            </div>
-          </PopoverButton>
-          <PopoverPanel transition anchor='bottom end'>
-            <div className={theme}>
-              <MenuWrapper>
-                {[50, 100, 300].map((item) => (
-                  <MenuItem onClick={() => handleChangePerPage(item)} key={item}>
-                    {item}
-                  </MenuItem>
-                ))}
-              </MenuWrapper>
-            </div>
-          </PopoverPanel>
-        </Popover>
+        <Pagination
+          currentPage={page}
+          totalPages={Math.floor(TOTAL_RECORD / perPage)}
+          onPageChange={handleChangePage}
+        />
+        <div className='sm:block hidden'>
+          <PerPageSelector perPage={perPage} onChange={handleChangePerPage} options={[50, 100, 300]} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };

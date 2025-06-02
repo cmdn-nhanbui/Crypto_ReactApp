@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 
 import { Button } from '@/shared/components/Button';
 import { ROUTES } from '@/core/constants/routes';
+import './Error.scss';
+
 import type { ErrorProps } from '@/core/constants/types';
 
 export const Error = ({
