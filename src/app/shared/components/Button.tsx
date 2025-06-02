@@ -6,22 +6,22 @@ type ButtonProps = {
   icon?: ReactNode;
   onClick?: () => void;
   className?: string;
-  color?: 'primary' | 'warning' | 'secondary';
+  color?: 'primary' | 'warning' | 'secondary' | 'yellow';
   disable?: boolean;
 };
 
 const colorData = {
-  primary:
-    'bg-[var(--green-primary)] shadow-[0_4px_0_0_#35af00]  border-[var(--green-primary)] text-white hover:bg-[#35af00]',
-  secondary: 'bg-white hover:bg-[#f1f5f9] bg-white shadow-[0_4px_0_0_#cbd5e1] border-[var(--background-secondary)]',
+  primary: 'bg-[var(--green-primary)]  border-[var(--green-primary)] text-white hover:bg-[#35af00]',
+  secondary: 'bg-white hover:bg-[#f1f5f9] bg-white  border-[var(--background-secondary)]',
   warning: 'text-white bg-[var(--red-primary)]',
+  yellow: 'text-[var(--yellow-primary)] border-[var(--yellow-primary)]',
 };
 
 export const Button = ({ children, onClick, className, color = 'secondary', disable = false }: ButtonProps) => {
   const colorClass = color ? colorData[color] : '';
 
   const buttonClasses = clsx(
-    'py-1.5 px-2.5 text-xs font-semibold  border-t-2 border-l-2 border-r-2 rounded-lg mb-1',
+    'py-1.5 px-2.5 text-xs font-semibold  border-t-2 border-2 rounded-lg',
     colorClass,
     {
       'cursor-default': disable,

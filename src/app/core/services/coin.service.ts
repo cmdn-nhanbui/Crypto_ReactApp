@@ -20,7 +20,7 @@ export const getCoinById = async (id: string) => {
   return response?.data;
 };
 
-export const getCoinHistory = async (id: string) => {
-  const response = await request.get(`/v3/coins/${id}/market_chart?vs_currency=usd&days=7`);
+export const getCoinHistory = async (id: string, days: number = 7) => {
+  const response = await request.get(`/coins/${id}/market_chart?vs_currency=usd&days=${days}`);
   return response?.data;
 };

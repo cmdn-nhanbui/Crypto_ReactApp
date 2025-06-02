@@ -89,6 +89,11 @@ export const Header = ({}) => {
             </h1>
           </Link>
           <div className='flex gap-2'>
+            <Link className='flex' to={ROUTES.FAVORITE}>
+              <Button>
+                <StarFilled className='!text-amber-300' />
+              </Button>
+            </Link>
             <Button onClick={handleChangeTheme} color='secondary'>
               {theme === 'light' ? <MoonOutlined /> : <SunOutlined />}
             </Button>
@@ -125,11 +130,6 @@ export const Header = ({}) => {
             </nav>
 
             <div className='flex items-center gap-2 text-[var(--text-primary)] sm:flex-row flex-row-reverse flex-1 sm:flex-none sm:w-fit w-full'>
-              <Link className='flex' to={ROUTES.FAVORITE}>
-                <StarFilled className='mr-1 !text-amber-300' />
-                Favorite
-              </Link>
-
               <Search />
             </div>
           </div>
