@@ -172,27 +172,32 @@ export const Chart = ({ coinData }: ChartProps) => {
   };
 
   useEffect(() => {
-    if (id) {
-      // getSampleData(timeRange)
-      getCoinHistory(id, timeRanges[timeRange].day)
-        .then((res) => {
-          let priceHistory: [number, number][] = res?.prices;
-          if (timeRange === '1h') priceHistory = priceHistory.slice(-12);
+    const fetchCoinHistory = async () => {
+      if (!id) return;
 
-          const timeStamps: number[] = [];
-          const prices: number[] = [];
+      try {
+        const res = await getCoinHistory(id, timeRanges[timeRange].day);
+        let priceHistory: [number, number][] = res?.prices;
 
-          priceHistory?.forEach(([timestamp, price]) => {
-            timeStamps.push(timestamp);
-            prices.push(price);
-          });
+        if (timeRange === '1h') {
+          priceHistory = priceHistory.slice(-12);
+        }
 
-          return setCoinHistory({ timeStamps, prices });
-        })
-        .catch((err) => {
-          console.log(err);
+        const timeStamps: number[] = [];
+        const prices: number[] = [];
+
+        priceHistory?.forEach(([timestamp, price]) => {
+          timeStamps.push(timestamp);
+          prices.push(price);
         });
-    }
+
+        setCoinHistory({ timeStamps, prices });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchCoinHistory();
   }, [id, timeRange]);
 
   return (

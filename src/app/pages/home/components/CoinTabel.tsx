@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
 import { PerPageSelector } from '@/shared/components/PerPageSelector';
 import Pagination from '@/shared/components/Pagination';
 import { TableBodySkeleton } from './TableSkeleton';
-import { type CoinProps, CoinRow } from './CoinRow';
+import { CoinRow } from './CoinRow';
 
-import { mapApiCoinToComponent } from '@/core/mappers/coin.mapper';
-import { getCoinsData } from '@/core/services/coin.service';
+import { useRealTimeCoinData } from '@/core/services/coin.service';
+
+import { ROUTES } from '@/core/constants/routes';
+// import { getCoinsData } from '@/core/services/coin.service';
 
 export type SortKey = (typeof tabelFields)[number]['id'];
 
@@ -62,10 +65,6 @@ export const CoinTabel = () => {
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(50);
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const [coins, setCoins] = useState<CoinProps[]>([]);
-
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     key: 'price',
     direction: 'desc',
@@ -85,33 +84,31 @@ export const CoinTabel = () => {
     setPerPage(limit);
   };
 
-  const fetchData = async () => {
-    setIsLoading(true);
-    try {
-      const res = await getCoinsData({
-        page,
-        perPage,
-        sortBy: `${sortConfig.key}_${sortConfig.direction}`,
-      });
+  const { data, isLoading, error, refetch } = useRealTimeCoinData({
+    page,
+    perPage,
+    sortBy: `${sortConfig.key}_${sortConfig.direction}`,
+  });
 
-      const data = res?.map(mapApiCoinToComponent);
-      setCoins(data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchData();
-  }, [page, perPage, sortConfig]);
+  if (error) return <Navigate to={ROUTES.SERVER_ERROR} />;
 
   const getArrow = (key: SortKey) => {
     if (sortConfig.key !== key) return <CaretDownOutlined />;
     return sortConfig.direction === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />;
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page, perPage]);
+
+  useEffect(() => {
+    const itervalId = setInterval(() => {
+      refetch();
+    }, 3000);
+    return () => {
+      clearInterval(itervalId);
+    };
+  }, []);
 
   return (
     <>
@@ -139,7 +136,7 @@ export const CoinTabel = () => {
             {isLoading ? (
               <TableBodySkeleton />
             ) : (
-              coins?.map((item, index) => <CoinRow key={index} index={index + 1} data={item} />)
+              data?.map((item, index) => <CoinRow key={index} index={index + 1} data={item} />)
             )}
           </tbody>
         </table>

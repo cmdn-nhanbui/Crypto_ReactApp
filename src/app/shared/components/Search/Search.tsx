@@ -2,9 +2,10 @@ import { SearchOutlined } from '@ant-design/icons';
 import { SearchPopper } from './SearchPopper';
 import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import { useDebounce } from '@/shared/hooks/useDebounce';
-import { searchCoin } from '@/core/services/coin.service';
+import { useSearchCoin } from '@/core/services/coin.service';
 import { type SearchItemProps } from '@/core/constants/types';
 import { mapSearchResultData } from '@/core/mappers/coin.mapper';
+import { Spinner } from '../Spinner';
 
 export const Search = () => {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -36,27 +37,19 @@ export const Search = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const fetchSearchResults = async () => {
-      if (debouncedValue.trim()) {
-        setNotFound(false);
-        try {
-          const res = await searchCoin(debouncedValue);
-          if (res?.coins?.length === 0) {
-            setNotFound(true);
-          }
-          const coinResults = res?.coins?.map(mapSearchResultData);
-          setSearchResult(coinResults);
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        setSearchResult([]);
-      }
-    };
+  const { data, isLoading } = useSearchCoin(debouncedValue);
 
-    fetchSearchResults();
-  }, [debouncedValue]);
+  useEffect(() => {
+    if (data) {
+      if (data.coins?.length === 0) {
+        setNotFound(true);
+      } else {
+        const coinResults = data.coins.map(mapSearchResultData);
+        setSearchResult(coinResults);
+        setNotFound(false);
+      }
+    }
+  }, [data]);
 
   return (
     <div className='relative w-full' ref={wrapperRef}>
@@ -67,7 +60,10 @@ export const Search = () => {
           placeholder='search'
           className='outline-none text-[var(--text-secondary)] w-full box-border pr-8'
         />
-        <SearchOutlined className='absolute top-1/2 left-2 transform -translate-y-1/2' />
+
+        <div className='absolute top-1/2 left-2 transform -translate-y-1/2'>
+          {isLoading ? <Spinner className='w-4 h-4' /> : <SearchOutlined />}
+        </div>
       </div>
 
       {showPopper && (

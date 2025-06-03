@@ -7,6 +7,7 @@ import type { FavoriteCoin } from '@/core/constants/types';
 import { formatUSPrice } from '@/core/helpers/coin.helper';
 import { DeltaBadge } from '@/shared/components/DeltaBadge';
 import { useStorage } from '@/shared/hooks/useStorage';
+import { memo, useEffect, useRef, useState } from 'react';
 
 export type CoinProps = {
   id: string;
@@ -24,7 +25,7 @@ export type CoinProps = {
   fullyDilutedValuation: number;
 };
 
-export const CoinRow = ({ index, data }: { index: number; data: CoinProps }) => {
+export const CoinRow = memo(({ index, data }: { index: number; data: CoinProps }) => {
   const ratioMarketCap = data?.marketCap / data?.fullyDilutedValuation;
   const isIncreaseInWeek = data?.percentWeekChange > 0;
   const { favoriteCoins, setFavoriteCoins } = useStorage();
@@ -59,6 +60,29 @@ export const CoinRow = ({ index, data }: { index: number; data: CoinProps }) => 
     });
   };
 
+  const [priceClass, setPriceClass] = useState('');
+  const prevPriceRef = useRef<number>(data?.price);
+
+  useEffect(() => {
+    const prevPrice = prevPriceRef.current;
+
+    if (data?.price > prevPrice) {
+      setPriceClass('text-green-500');
+    } else if (data?.price < prevPrice) {
+      setPriceClass('text-red-500');
+    }
+
+    prevPriceRef.current = data?.price;
+
+    if (data?.price !== prevPrice) {
+      const timeout = setTimeout(() => {
+        setPriceClass('');
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [data?.price]);
+
   return (
     <tr className='hover:bg-[var(--background-secondary)] bg-[var(--background)] text-sm text-[var(--text-primary)]'>
       <td className='left-0 px-1 py-2.5 bg-inheritw-10 text-center'>
@@ -85,7 +109,7 @@ export const CoinRow = ({ index, data }: { index: number; data: CoinProps }) => 
         </Link>
       </td>
 
-      <td className='text-center px-1 py-2.5 bg-inherit'>${formatUSPrice(data?.price)}</td>
+      <td className={`text-center px-1 py-2.5 bg-inherit ${priceClass} ease-all`}>${formatUSPrice(data?.price)}</td>
       <td className='text-center px-1 py-2.5 bg-inherit'>
         <DeltaBadge value={data?.percentOneHourChange} />
       </td>
@@ -108,4 +132,4 @@ export const CoinRow = ({ index, data }: { index: number; data: CoinProps }) => 
       </td>
     </tr>
   );
-};
+});
