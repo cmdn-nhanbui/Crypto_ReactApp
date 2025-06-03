@@ -26,10 +26,12 @@
   }
   &-title {
     font-size: 26px;
+    color: var(--text-primary);
   }
   &-description {
     font-size: 14px;
     font-weight: 500;
+    color: var(--text-primary);
   }
   &-navigate {
     margin-top: 16px;

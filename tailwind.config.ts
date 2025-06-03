@@ -17,6 +17,10 @@ module.exports = {
           '"Segoe UI Symbol"',
         ],
       },
+      textColor: {
+        secondary: 'var(--text-secondary)',
+        primary: 'var(--text-primary)',
+      },
     },
   },
 };
