@@ -18,7 +18,7 @@ import type { ChartProps, CoinHistory, TimeRangeType } from '@/core/constants/ty
 import { TimeManagement } from '../components/TimeManagement';
 import { DeltaBadge } from '@/shared/components/DeltaBadge';
 
-import { coinHistory, coinHistoryOneDay } from '../data/data.sample';
+// import { coinHistory, coinHistoryOneDay } from '../data/data.sample';
 import { formatUSPrice } from '@/core/helpers/coin.helper';
 import { formatDays, formatHours } from '@/core/helpers/time.helper';
 import { getCoinHistory } from '@/core/services/coin.service';
@@ -33,20 +33,20 @@ ChartJS.register(
   Legend,
 );
 
-const getSampleData = (timeRange: TimeRangeType) => {
-  let priceHistory = timeRange == '7d' ? coinHistory.prices : coinHistoryOneDay.prices;
-  if (timeRange === '1h') priceHistory = priceHistory.slice(-12);
+// const getSampleData = (timeRange: TimeRangeType) => {
+//   let priceHistory = timeRange == '7d' ? coinHistory.prices : coinHistoryOneDay.prices;
+//   if (timeRange === '1h') priceHistory = priceHistory.slice(-12);
 
-  const timeStamps: number[] = [];
-  const prices: number[] = [];
+//   const timeStamps: number[] = [];
+//   const prices: number[] = [];
 
-  priceHistory?.forEach(([timestamp, price]) => {
-    timeStamps.push(timestamp);
-    prices.push(price);
-  });
+//   priceHistory?.forEach(([timestamp, price]) => {
+//     timeStamps.push(timestamp);
+//     prices.push(price);
+//   });
 
-  return { timeStamps, prices };
-};
+//   return { timeStamps, prices };
+// };
 
 const timeRanges = {
   '1h': {

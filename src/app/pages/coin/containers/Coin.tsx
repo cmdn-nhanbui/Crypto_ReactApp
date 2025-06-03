@@ -23,6 +23,7 @@ const Coin = () => {
 
   useEffect(() => {
     if (id) {
+      setIsLoading(true);
       getCoinById(id)
         .then((res) => {
           setCoinData(mapCoinDetailData(res));

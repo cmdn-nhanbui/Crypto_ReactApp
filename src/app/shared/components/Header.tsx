@@ -5,11 +5,11 @@ import { DeltaBadge } from './DeltaBadge';
 import { Button } from './Button';
 
 import { ROUTES } from '@/core/constants/routes';
-import { Search } from '@/shared/components/Search';
+import { Search } from '@/shared/components/Search/Search';
 import { useTheme } from '../hooks/useTheme';
 
-import logo from '@assets/coingecko-1.svg';
-import logoDark from '@assets/coingecko-dark.svg';
+import logo from '@assets/images/coingecko-1.svg';
+import logoDark from '@assets/images/coingecko-dark.svg';
 
 export const Header = ({}) => {
   const { theme, setTheme } = useTheme();
@@ -86,7 +86,7 @@ export const Header = ({}) => {
           </ul>
           <Link className='lg:hidden block md:hidden' to={ROUTES.ROOT}>
             <h1 className='h-8 cursor-pointer'>
-              <img src={theme === 'light' ? logo : logoDark} className='h-full' alt='logo' />
+              <div className='logo h-full w-auto object-cover' />
             </h1>
           </Link>
           <div className='flex gap-2'>
@@ -95,11 +95,11 @@ export const Header = ({}) => {
                 <StarFilled className='!text-amber-300' />
               </Button>
             </Link>
-            <Button onClick={handleChangeTheme} color='secondary'>
+            <Button onClick={handleChangeTheme} color='SECONDARY'>
               {theme === 'light' ? <MoonOutlined /> : <SunOutlined />}
             </Button>
-            <Button color='secondary'>Login</Button>
-            <Button color='primary'>Sign up</Button>
+            <Button color='SECONDARY'>Login</Button>
+            <Button color='PRIMARY'>Sign up</Button>
           </div>
         </div>
         <div className='py-2.5 header-bottom flex border-b border-[var(--border-primary)]'>
@@ -130,7 +130,7 @@ export const Header = ({}) => {
               </Link>
             </nav>
 
-            <div className='flex items-center gap-2 text-[var(--text-primary)] sm:flex-row flex-row-reverse flex-1 sm:flex-none sm:w-fit w-full'>
+            <div className='flex items-center gap-2 text-[var(--text-primary)] sm:flex-row flex-row-reverse flex-1 sm:flex-none lg:w-fit w-full'>
               <Search />
             </div>
           </div>

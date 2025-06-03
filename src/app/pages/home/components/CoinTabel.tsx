@@ -85,24 +85,27 @@ export const CoinTabel = () => {
     setPerPage(limit);
   };
 
-  const fetchData = () => {
+  const fetchData = async () => {
     setIsLoading(true);
-    getCoinsData({ page, perPage, sortBy: `${sortConfig.key}_${sortConfig.direction}` })
-      .then((res) => {
-        const data = res?.map(mapApiCoinToComponent);
-        setCoins(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => setIsLoading(false));
+    try {
+      const res = await getCoinsData({
+        page,
+        perPage,
+        sortBy: `${sortConfig.key}_${sortConfig.direction}`,
+      });
+
+      const data = res?.map(mapApiCoinToComponent);
+      setCoins(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchData();
-    // const data = mapApiCoinToComponent(exampleData);
-    // setCoins([data]);
   }, [page, perPage, sortConfig]);
 
   const getArrow = (key: SortKey) => {

@@ -6,7 +6,7 @@ const sortKeyMap: Record<string, keyof FavoriteCoin> = {
   '1h_volume_change': 'changePercentage1h',
   '24h_change': 'changePercentage24h',
   '7d_volume_change': 'changePercentage7d',
-  '30d': 'changePercentage30d',
+  '30d_volume_change': 'changePercentage30d',
   '24h_volume': 'volume',
   market_cap: 'marketCap',
 };

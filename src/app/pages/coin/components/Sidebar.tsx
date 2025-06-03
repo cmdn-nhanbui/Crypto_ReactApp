@@ -82,7 +82,7 @@ export const Sidebar = ({ data, isLoading = true }: { data?: CoinDetailData; isL
               </div>
             </div>
           </div>
-          <Button onClick={handleFavoriteCoin} color={isFavorited ? 'yellow' : 'secondary'}>
+          <Button onClick={handleFavoriteCoin} color={isFavorited ? 'YELLOW' : 'TRANSPARENT'}>
             <div className={`flex text-sm`}>
               {isFavorited ? <StarFilled className='mr-2' /> : <StarOutlined className='mr-2' />}
               {isFavorited ? 'Remove from Favorite list' : 'Add to Favorite list'}
