@@ -34,6 +34,7 @@ export const favoriteTabelFields = [
   },
   {
     name: '30d',
+    id: '30d_volume_change',
   },
   {
     name: '24h Volume',
@@ -175,7 +176,7 @@ const Favorite = () => {
         <div></div>
         <Pagination totalPages={totalPage} currentPage={page} onPageChange={handleChangePage} />
         <div className='sm:block hidden'>
-          <PerPageSelector perPage={perPage} onChange={handleChangePerPage} options={[20, 40, 60]} />
+          <PerPageSelector perPage={perPage} onChange={handleChangePerPage} options={[10, 20, 40]} />
         </div>
       </div>
     </div>

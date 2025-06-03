@@ -1,18 +1,21 @@
 import clsx from 'clsx';
 import type { ButtonProps } from '@/core/constants/types';
+import { THEME } from '@/core/constants/theme';
 
-const colorData = {
-  primary: 'bg-[var(--green-primary)]  border-[var(--green-primary)] text-white hover:bg-[#35af00]',
-  secondary: 'bg-white hover:bg-[#f1f5f9] bg-white  border-[var(--background-secondary)]',
-  warning: 'text-white bg-[var(--red-primary)]',
-  yellow: 'text-[var(--yellow-primary)] border-[var(--yellow-primary)]',
-};
-
-export const Button = ({ children, onClick, className, color = 'secondary', disable = false }: ButtonProps) => {
-  const colorClass = color ? colorData[color] : '';
+export const Button = ({
+  children,
+  onClick,
+  className,
+  color = 'SECONDARY',
+  disable = false,
+  variant = 'CONTAINED',
+}: ButtonProps) => {
+  const colorClass = color ? THEME.BUTTON.COLOR[color] : '';
+  const variantClass = variant ? THEME.BUTTON.VARIANT[variant] : '';
 
   const buttonClasses = clsx(
-    'py-1.5 px-2.5 text-xs font-semibold  border-t-2 border-2 rounded-lg',
+    THEME.BUTTON.BASE,
+    variantClass,
     colorClass,
     {
       'cursor-default': disable,

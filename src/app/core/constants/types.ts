@@ -96,12 +96,16 @@ export type TimeManagementProps = {
   onChange?: (id: string) => void;
 };
 
+type Variant = 'TEXT' | 'OUTLINED' | 'CONTAINED';
+type Color = 'PRIMARY' | 'SECONDARY' | 'YELLOW' | 'WARNING' | 'TRANSPARENT';
+
 export type ButtonProps = {
   children: ReactNode;
   icon?: ReactNode;
   onClick?: () => void;
   className?: string;
-  color?: 'primary' | 'warning' | 'secondary' | 'yellow';
+  variant?: Variant;
+  color?: Color;
   disable?: boolean;
 };
 
@@ -127,3 +131,5 @@ export type SkeletonProps = {
   rounded?: boolean;
   className?: string;
 };
+
+export type SearchItemProps = Pick<CoinDetailData, 'id' | 'name' | 'symbol' | 'thumbnail'>;

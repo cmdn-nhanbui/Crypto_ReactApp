@@ -24,3 +24,12 @@ export const getCoinHistory = async (id: string, days: number = 7) => {
   const response = await request.get(`/coins/${id}/market_chart?vs_currency=usd&days=${days}`);
   return response?.data;
 };
+
+export const searchCoin = async (query: string) => {
+  const response = await request.get(`/search`, {
+    params: {
+      query: query,
+    },
+  });
+  return response?.data;
+};

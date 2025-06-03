@@ -26,6 +26,7 @@ const Home = () => {
 
   const fakeData1 = generateFakeChartData(200, 100);
   const fakeData2 = generateFakeChartData(200, 100);
+
   return (
     <div className='container min-h-[calc(100vh-120px)] pt-4 '>
       <div className='row'>

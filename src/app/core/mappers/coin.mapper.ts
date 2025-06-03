@@ -1,5 +1,5 @@
 import type { CoinProps } from '@/pages/home/components/CoinRow';
-import type { CoinDetailData } from '../constants/types';
+import type { CoinDetailData, SearchItemProps } from '../constants/types';
 
 export const mapApiCoinToComponent = (coinData: any): CoinProps => {
   return {
@@ -52,5 +52,14 @@ export const mapCoinDetailData = (responseData: any): CoinDetailData => {
     circulatingSupply: marketData?.circulating_supply,
     totalSupply: marketData?.total_supply,
     maxSupply: marketData?.max_supply,
+  };
+};
+
+export const mapSearchResultData = (searchResponse: any): SearchItemProps => {
+  return {
+    id: searchResponse?.id,
+    name: searchResponse?.name,
+    thumbnail: searchResponse?.thumb,
+    symbol: searchResponse?.symbol,
   };
 };

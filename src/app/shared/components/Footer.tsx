@@ -4,8 +4,8 @@ import { Button } from './Button';
 import { ROUTES } from '@/core/constants/routes';
 import { useTheme } from '../hooks/useTheme';
 
-import logo from '@assets/coingecko-1.svg';
-import logoDrark from '@assets/coingecko-dark.svg';
+import logo from '@assets/images/coingecko-1.svg';
+import logoDrark from '@assets/images/coingecko-dark.svg';
 
 const footerMenus = [
   {
@@ -81,7 +81,7 @@ export const Footer = () => {
                 placeholder='Enter your email address'
               />
             </div>
-            <Button disable color='primary'>
+            <Button disable color='PRIMARY'>
               Subscribe
             </Button>
           </form>

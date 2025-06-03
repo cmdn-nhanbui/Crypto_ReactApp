@@ -1,0 +1,20 @@
+.logo {
+  background-image: url('@assets/images/coingecko-1.svg');
+  height: 40px;
+  width: 184px;
+  background-size: cover;
+}
+
+.dark {
+  .logo {
+    background-image: url('@assets/images/coingecko-dark.svg');
+  }
+}
+
+@media (max-width: 740px) {
+  .logo {
+    width: 32px;
+    height: 32px;
+    background-image: url('@assets/images/CoinGecko_small_logo.png') !important;
+  }
+}

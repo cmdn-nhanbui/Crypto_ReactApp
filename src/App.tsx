@@ -7,6 +7,8 @@ import { Theme } from '@/shared/contexts/theme.context';
 import { RouterOutlet } from '@/core/modules/custom-router-dom/RouterOutlet';
 import appRoutes from '@/app.route';
 
+import './stylesheet/scss/style.scss';
+
 function App() {
   return (
     <ToastProvider>
