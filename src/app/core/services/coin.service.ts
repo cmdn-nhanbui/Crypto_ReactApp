@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import request from './api.service';
 
 import type { CoinProps } from '@/pages/home/components/CoinRow';
-import type { CoinDetailData, CoinHistory } from '../constants/types';
+import type { CoinDetailData, UseCoinsDataParams } from '../constants/types';
 import { mapApiCoinToComponent, mapCoinDetailData } from '../mappers/coin.mapper';
+import { QUERY_KEYS } from '../constants/queryKeys';
 
 export const getCoinsData = async ({
   page,
@@ -20,9 +21,21 @@ export const getCoinsData = async ({
   return response?.data;
 };
 
+export const useCoinsData = ({ page, perPage, sortBy = 'market_cap_desc' }: UseCoinsDataParams) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_COIN_DATA, page, perPage, sortBy],
+    queryFn: async () => {
+      const response = await getCoinsData({ page, perPage, sortBy });
+      const coins: CoinProps[] = response?.map(mapApiCoinToComponent);
+      return coins;
+    },
+    staleTime: 1000 * 60,
+  });
+};
+
 export const useCoinId = (id?: string) => {
   return useQuery<CoinDetailData, Error>({
-    queryKey: ['coin_by_id', id],
+    queryKey: [QUERY_KEYS.GET_COIN_BY_ID, id],
     queryFn: async () => {
       const response = await request.get(`/coins/${id}`);
       return mapCoinDetailData(response.data);
@@ -34,27 +47,23 @@ export const useCoinId = (id?: string) => {
   });
 };
 
-export const getCoinHistory = async (id: string, days: number = 7) => {
-  const response = await request.get(`/coins/${id}/market_chart?vs_currency=usd&days=${days}`);
-  return response?.data;
-};
-
 export const useCoinHistory = (id: string, days: number = 7) => {
   return useQuery({
-    queryKey: ['coin_history', id, days],
+    queryKey: [QUERY_KEYS.GET_HISTORY_COIN, id, days],
     queryFn: async () => {
       const response = await request.get(`/coins/${id}/market_chart`, {
         params: { vs_currency: 'usd', days: days },
       });
-      const data: CoinHistory = response?.data;
-      return data;
+      return response?.data;
     },
+    staleTime: 3 * 60 * 1000,
+    gcTime: 3 * 60 * 1000,
   });
 };
 
 export const useSearchCoin = (query: string) => {
   return useQuery({
-    queryKey: ['search_coin', query],
+    queryKey: [QUERY_KEYS.SEARCH_COIN, query],
     queryFn: async () => {
       const response = await request.get('/search', {
         params: { query },
@@ -75,9 +84,15 @@ export const useRealTimeCoinData = ({
   sortBy?: string;
 }) => {
   return useQuery({
-    queryKey: ['coins_realtime', page, perPage, sortBy],
+    queryKey: [QUERY_KEYS.COIN_REAL_TIME, page, perPage, sortBy],
     queryFn: async () => {
-      const res = await request.get(`http://localhost:3001/coins?page=${page}&per_page=${perPage}&sort=${sortBy}`);
+      const res = await request.get(`http://localhost:3001/coins`, {
+        params: {
+          page: page,
+          per_page: perPage,
+          sort: sortBy,
+        },
+      });
       const data = res?.data?.data;
       const coins: CoinProps[] = data?.map(mapApiCoinToComponent);
       return coins;

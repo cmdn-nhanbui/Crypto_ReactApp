@@ -10,49 +10,10 @@ import { CoinRow } from './CoinRow';
 import { useRealTimeCoinData } from '@/core/services/coin.service';
 
 import { ROUTES } from '@/core/constants/routes';
+import { COIN_TABLE_FIELDS } from '@/core/constants/fields';
 // import { getCoinsData } from '@/core/services/coin.service';
 
-export type SortKey = (typeof tabelFields)[number]['id'];
-
-export const tabelFields = [
-  {
-    name: 'Coin',
-    id: 'coin_name',
-  },
-  {
-    name: 'Price',
-    id: 'volume',
-  },
-  {
-    name: '1h',
-    id: '1h_volume_change',
-  },
-  {
-    name: '24h',
-    id: '24h_change',
-  },
-  {
-    name: '7d',
-    id: '7d_volume_change',
-  },
-  {
-    name: '30d',
-  },
-  {
-    name: '24h Volume',
-    id: '24h_volume',
-  },
-  {
-    name: 'Market Cap',
-    id: 'market_cap',
-  },
-  {
-    name: 'Market Cap/FDV',
-  },
-  {
-    name: 'Last 7 Days',
-  },
-];
+export type SortKey = (typeof COIN_TABLE_FIELDS)[number]['id'];
 
 export type SortConfig = {
   key: SortKey;
@@ -121,13 +82,13 @@ export const CoinTabel = () => {
             <tr>
               <th></th>
               <th>#</th>
-              {tabelFields?.map((field, index) => (
+              {COIN_TABLE_FIELDS?.map((field, index) => (
                 <th
                   key={index}
                   className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
                   onClick={() => handleSort(field.id)}
                 >
-                  {field.name} {field?.id && getArrow(field?.id)}
+                  {field.NAME} {field?.id && getArrow(field?.id)}
                 </th>
               ))}
             </tr>

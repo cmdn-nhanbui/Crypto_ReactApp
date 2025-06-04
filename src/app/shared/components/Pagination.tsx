@@ -60,7 +60,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 
 export default Pagination;
 
-function getVisiblePages(current: number, total: number): (number | '...')[] {
+const getVisiblePages = (current: number, total: number): (number | '...')[] => {
   const pages: (number | '...')[] = [];
 
   if (total <= 7) {
@@ -85,4 +85,4 @@ function getVisiblePages(current: number, total: number): (number | '...')[] {
   }
 
   return pages;
-}
+};

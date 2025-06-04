@@ -27,59 +27,35 @@ export const Header = ({}) => {
           <ul className='py-2 text-xs md:flex gap-4 hidden'>
             <li className='text-[var(--text-secondary)]'>
               Coins:
-              <a
-                href='/'
-                data-view-component='true'
-                className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'
-              >
+              <a href='/' className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'>
                 17,241
               </a>
             </li>
             <li className='text-[var(--text-secondary)]'>
               Exchanges:
-              <a
-                href='/'
-                data-view-component='true'
-                className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'
-              >
+              <a href='/' className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'>
                 1,277
               </a>
             </li>
             <li className='text-[var(--text-secondary)] flex items-center'>
               Market Cap:
-              <a
-                href='/'
-                data-view-component='true'
-                className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'
-              >
+              <a href='/' className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'>
                 $3.545T
               </a>
               <DeltaBadge value={0.5} />
             </li>
             <li className='text-[var(--text-secondary)] flex items-center'>
               24h Vol:
-              <a
-                href='/'
-                data-view-component='true'
-                className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'
-              >
+              <a href='/' className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'>
                 $122.052B
               </a>
             </li>
             <li className='text-[var(--text-secondary)] flex items-center'>
               Dominance:
-              <a
-                href='/'
-                data-view-component='true'
-                className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'
-              >
+              <a href='/' className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'>
                 BTC 60.4%
               </a>
-              <a
-                href='/'
-                data-view-component='true'
-                className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'
-              >
+              <a href='/' className='text-[var(--text-gray)] font-semibold hover:text-[var(--green-primary)] ml-1'>
                 ETH 9.24%
               </a>
             </li>

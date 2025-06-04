@@ -1,14 +1,16 @@
 import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { RightOutlined } from '@ant-design/icons';
+import { Skeleton } from './Skeleton';
 
 type Props = {
   children: ReactNode;
   title: string;
   viewMore: string;
+  isLoading: boolean;
 };
 
-export const Card = ({ children, title, viewMore }: Props) => {
+export const Card = ({ children, title, viewMore, isLoading }: Props) => {
   return (
     <div className='py-1.5 px-2 shadow-xs rounded-xl bg-[var(--background)] border border-[var(--border-primary)]'>
       <div className='flex justify-between pt-2.5 mb-2.5 px-2 truncate'>
@@ -23,7 +25,15 @@ export const Card = ({ children, title, viewMore }: Props) => {
           </Link>
         </div>
       </div>
-      {children}
+      {isLoading ? (
+        <div className='flex flex-col gap-3'>
+          <Skeleton height='h-7' />
+          <Skeleton height='h-7' />
+          <Skeleton height='h-7' />
+        </div>
+      ) : (
+        children
+      )}
     </div>
   );
 };
