@@ -133,3 +133,14 @@ export type SkeletonProps = {
 };
 
 export type SearchItemProps = Pick<CoinDetailData, 'id' | 'name' | 'symbol' | 'thumbnail'>;
+
+export type UseCoinsDataParams = {
+  page: number;
+  perPage: number;
+  sortBy?: string;
+};
+
+export type FormatHistoryResult = {
+  timeStamps: number[];
+  prices: number[];
+};

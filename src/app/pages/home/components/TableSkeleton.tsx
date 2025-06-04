@@ -1,7 +1,7 @@
+import { COIN_TABLE_FIELDS } from '@/core/constants/fields';
 import { Skeleton } from '@/shared/components/Skeleton';
-import { tabelFields } from './CoinTabel';
 
-const ROWS_SKELETON = 5; // số hàng skeleton muốn hiển thị khi loading
+const ROWS_SKELETON = 5;
 
 export const TableBodySkeleton = () => {
   return (
@@ -14,7 +14,7 @@ export const TableBodySkeleton = () => {
           <td className='px-6 py-4'>
             <Skeleton width='w-4' height='h-4' rounded />
           </td>
-          {tabelFields?.map((_, index) => (
+          {COIN_TABLE_FIELDS?.map((_, index) => (
             <td key={index} className='px-6 py-4'>
               <Skeleton width='w-full' height='h-4' rounded />
             </td>

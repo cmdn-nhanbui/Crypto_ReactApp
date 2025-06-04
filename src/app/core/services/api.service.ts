@@ -12,20 +12,20 @@ const request = axios.create({
 
 // Add a request interceptor
 request.interceptors.request.use(
-  function (config) {
+  (config) => {
     return config;
   },
-  function (error) {
+  (error) => {
     return Promise.reject(error);
   },
 );
 
 // Add a response interceptor
 request.interceptors.response.use(
-  function (response) {
+  (response) => {
     return response;
   },
-  async function (error) {
+  async (error) => {
     return Promise.reject(error);
   },
 );

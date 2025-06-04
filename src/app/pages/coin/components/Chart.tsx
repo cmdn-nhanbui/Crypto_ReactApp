@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Line } from 'react-chartjs-2';
@@ -14,24 +14,16 @@ import {
   type ChartOptions,
 } from 'chart.js';
 
-import type { ChartProps, CoinHistory, TimeRangeType } from '@/core/constants/types';
+import type { ChartProps, TimeRangeType } from '@/core/constants/types';
 import { TimeManagement } from '../components/TimeManagement';
 import { DeltaBadge } from '@/shared/components/DeltaBadge';
 
 // import { coinHistory, coinHistoryOneDay } from '../data/data.sample';
-import { formatUSPrice } from '@/core/helpers/coin.helper';
+import { formatHistoryChart, formatUSPrice } from '@/core/helpers/coin.helper';
 import { formatDays, formatHours } from '@/core/helpers/time.helper';
-import { getCoinHistory } from '@/core/services/coin.service';
+import { useCoinHistory } from '@/core/services/coin.service';
 
-ChartJS.register(
-  LineElement,
-  PointElement,
-  LinearScale,
-  CategoryScale,
-  Filler, // 💡 Quan trọng: để fill màu dưới line
-  Tooltip,
-  Legend,
-);
+ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Filler, Tooltip, Legend);
 
 // const getSampleData = (timeRange: TimeRangeType) => {
 //   let priceHistory = timeRange == '7d' ? coinHistory.prices : coinHistoryOneDay.prices;
@@ -67,7 +59,24 @@ export const Chart = ({ coinData }: ChartProps) => {
   const { id } = useParams();
 
   const [timeRange, setTimeRange] = useState<TimeRangeType>('7d');
-  const [{ timeStamps, prices }, setCoinHistory] = useState<CoinHistory>({ timeStamps: [], prices: [] });
+
+  const handleChangeTimeRange = (time: string) => {
+    setTimeRange(time as TimeRangeType);
+  };
+
+  const { data: historyData } = useCoinHistory(String(id), timeRanges[timeRange].day);
+
+  let { timeStamps, prices }: { timeStamps: number[]; prices: number[] } = {
+    timeStamps: [],
+    prices: [],
+  };
+
+  if (historyData) {
+    let priceHistory: [number, number][] = historyData?.prices;
+    const reusult = formatHistoryChart(priceHistory, timeRange);
+    timeStamps = reusult?.timeStamps;
+    prices = reusult?.prices;
+  }
 
   const options: ChartOptions<'line'> = {
     responsive: true,
@@ -157,8 +166,8 @@ export const Chart = ({ coinData }: ChartProps) => {
         label: 'Price',
         data: prices, // number[] -> truc y
         fill: true,
-        backgroundColor: 'rgba(75,192,192,0.2)',
-        borderColor: '#4bcc00',
+        backgroundColor: coinData?.change24hUSD && coinData?.change24hUSD >= 0 ? '#4bcc002c' : '#dc262623',
+        borderColor: coinData?.change24hUSD && coinData?.change24hUSD >= 0 ? '#4bcc00' : '#ff3a33',
         borderWidth: 2,
         pointRadius: 0,
         tension: 0.4,
@@ -166,39 +175,6 @@ export const Chart = ({ coinData }: ChartProps) => {
       },
     ],
   };
-
-  const handleChangeTimeRange = (time: string) => {
-    setTimeRange(time as TimeRangeType);
-  };
-
-  useEffect(() => {
-    const fetchCoinHistory = async () => {
-      if (!id) return;
-
-      try {
-        const res = await getCoinHistory(id, timeRanges[timeRange].day);
-        let priceHistory: [number, number][] = res?.prices;
-
-        if (timeRange === '1h') {
-          priceHistory = priceHistory.slice(-12);
-        }
-
-        const timeStamps: number[] = [];
-        const prices: number[] = [];
-
-        priceHistory?.forEach(([timestamp, price]) => {
-          timeStamps.push(timestamp);
-          prices.push(price);
-        });
-
-        setCoinHistory({ timeStamps, prices });
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchCoinHistory();
-  }, [id, timeRange]);
 
   return (
     <>

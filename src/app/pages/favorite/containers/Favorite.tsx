@@ -1,53 +1,19 @@
+import { useEffect, useState } from 'react';
+import { CaretDownOutlined, CaretUpOutlined, StarFilled } from '@ant-design/icons';
+
+import { type SortConfig, type SortKey } from '@/pages/home/components/CoinTabel';
+import { PerPageSelector } from '@/shared/components/PerPageSelector';
+import Pagination from '@/shared/components/Pagination';
+import { FavoriteItem } from '../components/FavoriteItem';
+
+import { useStorage } from '@/shared/hooks/useStorage';
 import { type FavoriteCoin } from '@/core/constants/types';
-import { formatUSPrice } from '@/core/helpers/coin.helper';
 import { sortFavoriteCoins } from '@/core/helpers/favoriteCoin.helper';
 import { getPaginationData } from '@/core/helpers/pagination.helper';
-import { type SortConfig, type SortKey } from '@/pages/home/components/CoinTabel';
-import { DeltaBadge } from '@/shared/components/DeltaBadge';
-import Pagination from '@/shared/components/Pagination';
-import { PerPageSelector } from '@/shared/components/PerPageSelector';
-import { useStorage } from '@/shared/hooks/useStorage';
-import { CaretDownOutlined, CaretUpOutlined, StarFilled } from '@ant-design/icons';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
-export const favoriteTabelFields = [
-  {
-    name: 'Coin',
-    id: 'coin_name',
-  },
-  {
-    name: 'Price',
-    id: 'volume',
-  },
-  {
-    name: '1h',
-    id: '1h_volume_change',
-  },
-  {
-    name: '24h',
-    id: '24h_change',
-  },
-  {
-    name: '7d',
-    id: '7d_volume_change',
-  },
-  {
-    name: '30d',
-    id: '30d_volume_change',
-  },
-  {
-    name: '24h Volume',
-    id: '24h_volume',
-  },
-  {
-    name: 'Market Cap',
-    id: 'market_cap',
-  },
-];
+import { FAVORITE_TABEL_FIELDS } from '@/core/constants/fields';
 
 const Favorite = () => {
-  const { favoriteCoins, setFavoriteCoins } = useStorage();
+  const { favoriteCoins } = useStorage();
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(10);
   const totalPage = Math.ceil(favoriteCoins?.length / perPage);
@@ -67,11 +33,6 @@ const Favorite = () => {
     setSortConfig((prev) =>
       prev.key === key ? { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' } : { key, direction: 'asc' },
     );
-  };
-
-  //TODO Remove favorite coin
-  const handleRemoveFavoriteCoin = (id: string) => {
-    setFavoriteCoins((prev) => [...prev]?.filter((item) => item?.id !== id));
   };
 
   const handleChangePage = (pageChange: number) => setPage(pageChange);
@@ -119,54 +80,20 @@ const Favorite = () => {
             <tr>
               <th></th>
               <th className='px-1 py-3 text-sm font-medium text-center'>#</th>
-              {favoriteTabelFields?.map((field, index) => (
+              {FAVORITE_TABEL_FIELDS?.map((field, index) => (
                 <th
                   key={index}
                   className='cursor-pointer px-1 py-3 text-center text-sm font-medium'
-                  onClick={() => handleSort(field.id)}
+                  onClick={() => handleSort(field.ID)}
                 >
-                  {field.name} {field?.id && getArrow(field?.id)}
+                  {field.NAME} {field?.ID && getArrow(field?.ID)}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody className='divide-y divide-gray-200'>
             {paginationCoins?.map((item, index) => (
-              <tr
-                key={index}
-                className='hover:bg-[var(--background-secondary)] bg-[var(--background)] text-sm text-[var(--text-primary)]'
-              >
-                <td className='left-0 px-1 py-2.5 bg-inheritw-10 text-center'>
-                  <button onClick={() => handleRemoveFavoriteCoin(item?.id)} className='cursor-pointer'>
-                    <StarFilled style={{ color: '#eab308', fontSize: 18 }} />
-                  </button>
-                </td>
-                <td className='min-w-10 text-center  px-1 py-2.5 bg-inherit '>{index}</td>
-                <td className='px-1 py-2.5 bg-inherit'>
-                  <Link className='flex items-center w-full' to={`/coin/${item?.id}`}>
-                    <img className='mr-2 !h-6 w-6 object-fill' src={item?.thumbnail} alt={item?.name} />
-                    <div className='flex flex-col items-start'>
-                      <div className='font-semibold text-sm leading-5'>{item?.name}</div>
-                    </div>
-                  </Link>
-                </td>
-
-                <td className='text-center px-1 py-2.5 bg-inherit'>${formatUSPrice(item?.price)}</td>
-                <td className='text-center px-1 py-2.5 bg-inherit'>
-                  <DeltaBadge className='justify-center' value={item?.changePercentage1h} />
-                </td>
-                <td className='text-center px-1 py-2.5 bg-inherit'>
-                  <DeltaBadge className='justify-center' value={item?.changePercentage24h} />
-                </td>
-                <td className='text-center px-1 py-2.5 bg-inherit'>
-                  <DeltaBadge className='justify-center' value={item?.changePercentage7d} />
-                </td>
-                <td className='text-center d30 px-1 py-2.5 bg-inherit'>
-                  <DeltaBadge className='justify-center' value={item?.changePercentage30d} />
-                </td>
-                <td className='text-center px-1 py-2.5 bg-inherit'>${formatUSPrice(item?.volume)}</td>
-                <td className='text-center px-1 py-2.5 bg-inherit'>${formatUSPrice(item?.marketCap)}</td>
-              </tr>
+              <FavoriteItem key={index} data={item} index={index + 1} />
             ))}
           </tbody>
         </table>
