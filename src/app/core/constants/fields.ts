@@ -63,7 +63,7 @@ export const COIN_TABLE_FIELDS = [
   },
   {
     NAME: 'Market Cap',
-    id: 'market_cap',
+    ID: 'market_cap',
   },
   {
     NAME: 'Market Cap/FDV',
