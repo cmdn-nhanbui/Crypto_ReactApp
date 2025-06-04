@@ -5,7 +5,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { Sidebar } from '../components/Sidebar';
 import { Chart } from '../components/Chart';
 
-import { useCoinId } from '@/core/services/coin.service';
+import { useCoinId } from '@/shared/hooks/useCoins';
 import { ROUTES } from '@/core/constants/routes';
 
 const Coin = () => {

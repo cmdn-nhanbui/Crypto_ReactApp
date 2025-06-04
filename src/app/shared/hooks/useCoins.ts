@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import request from './api.service';
+import request from '../../core/services/api.service';
 
 import type { CoinProps } from '@/pages/home/components/CoinRow';
-import type { CoinDetailData, UseCoinsDataParams } from '../constants/types';
-import { mapApiCoinToComponent, mapCoinDetailData } from '../mappers/coin.mapper';
-import { QUERY_KEYS } from '../constants/queryKeys';
+import type { CoinDetailData, UseCoinsDataParams } from '../../core/constants/types';
+import { mapApiCoinToComponent, mapCoinDetailData } from '../../core/mappers/coin.mapper';
+import { QUERY_KEYS } from '../../core/constants/queryKeys';
+
+const TOTAL_RECORD = 17241;
 
 export const getCoinsData = async ({
   page,
@@ -27,7 +29,7 @@ export const useCoinsData = ({ page, perPage, sortBy = 'market_cap_desc' }: UseC
     queryFn: async () => {
       const response = await getCoinsData({ page, perPage, sortBy });
       const coins: CoinProps[] = response?.map(mapApiCoinToComponent);
-      return coins;
+      return { coins, totalDocs: TOTAL_RECORD };
     },
     staleTime: 1000 * 60,
   });
@@ -93,9 +95,11 @@ export const useRealTimeCoinData = ({
           sort: sortBy,
         },
       });
+      const totalDocs = res?.data?.totalDocs;
       const data = res?.data?.data;
       const coins: CoinProps[] = data?.map(mapApiCoinToComponent);
-      return coins;
+      return { coins, totalDocs };
     },
+    refetchInterval: 3000,
   });
 };

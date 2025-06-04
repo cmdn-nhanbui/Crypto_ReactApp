@@ -3,10 +3,10 @@ import MarketCard from '@/shared/components/MarketCard';
 import { Card } from '@/shared/components/Card';
 
 import { generateFakeChartData } from '@/core/helpers/coin.helper';
-import { useCoinsData } from '@/core/services/coin.service';
+import { useCoinsData } from '@/shared/hooks/useCoins';
 
 export const HighLightSection = () => {
-  let { data, isLoading } = useCoinsData({ page: 1, perPage: 10 });
+  const { data, isLoading } = useCoinsData({ page: 1, perPage: 10 });
 
   const fakeData1 = generateFakeChartData(200, 100);
   const fakeData2 = generateFakeChartData(200, 100);
@@ -20,7 +20,7 @@ export const HighLightSection = () => {
       <div className='col col-4 col-sm-12'>
         <Card isLoading={isLoading} title='🔥 Trending' viewMore='/'>
           <ul className='highlight-coins'>
-            {data?.slice(0, 3)?.map((item, index) => {
+            {data?.coins?.slice(0, 3)?.map((item, index) => {
               return (
                 <li className='highlight-coin-item' key={index}>
                   <CoinItem
@@ -39,7 +39,7 @@ export const HighLightSection = () => {
       <div className='col col-4 col-sm-12'>
         <Card isLoading={isLoading} title='🚀 Top Gainers' viewMore='/'>
           <ul className='highlight-coins'>
-            {data?.slice(3, 6)?.map((item, index) => {
+            {data?.coins?.slice(3, 6)?.map((item, index) => {
               return (
                 <li className='highlight-coin-item' key={index}>
                   <CoinItem

@@ -10,13 +10,14 @@ import { useTheme } from '../hooks/useTheme';
 
 import logo from '@assets/images/coingecko-1.svg';
 import logoDark from '@assets/images/coingecko-dark.svg';
+import { THEME } from '@/core/constants/theme';
 
 export const Header = ({}) => {
   const { theme, setTheme } = useTheme();
 
   const handleChangeTheme = (): void => {
     setTheme((prev) => {
-      return prev === 'dark' ? 'light' : 'dark';
+      return prev === THEME.DARK ? THEME.LIGHT : THEME.DARK;
     });
   };
 
@@ -81,7 +82,7 @@ export const Header = ({}) => {
         <div className='py-2.5 header-bottom flex border-b border-[var(--border-primary)]'>
           <Link to={ROUTES.ROOT}>
             <h1 className='h-10 cursor-pointer hidden lg:block'>
-              <img src={theme === 'light' ? logo : logoDark} className='h-full' alt='logo' />
+              <img src={theme === THEME.LIGHT ? logo : logoDark} className='h-full' alt='logo' />
             </h1>
           </Link>
           <div className='flex justify-between flex-1 w-full'>

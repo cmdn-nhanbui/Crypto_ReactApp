@@ -6,7 +6,7 @@ import { SearchPopper } from './SearchPopper';
 import { type SearchItemProps } from '@/core/constants/types';
 
 import { useDebounce } from '@/shared/hooks/useDebounce';
-import { useSearchCoin } from '@/core/services/coin.service';
+import { useSearchCoin } from '@/shared/hooks/useCoins';
 import { mapSearchResultData } from '@/core/mappers/coin.mapper';
 
 export const Search = () => {

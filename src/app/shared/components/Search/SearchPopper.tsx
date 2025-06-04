@@ -2,6 +2,7 @@ import { SearchItem } from './SearchItem';
 
 import { useTheme } from '@/shared/hooks/useTheme';
 import type { SearchItemProps } from '@/core/constants/types';
+import { THEME } from '@/core/constants/theme';
 
 export const SearchPopper = ({
   searchData,
@@ -13,7 +14,7 @@ export const SearchPopper = ({
   onClose?: () => void;
 }) => {
   const { theme } = useTheme();
-  const background = theme === 'dark' ? 'bg-[var(--background-secondary)]' : 'bg-[var(--background)]';
+  const background = theme === THEME.DARK ? 'bg-[var(--background-secondary)]' : 'bg-[var(--background)]';
 
   const handleClickItem = () => {
     if (onClose) onClose();

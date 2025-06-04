@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
 import { getLS, LS_KEYS, setLS } from '@/core/helpers/storage.helper';
+import { THEME } from '@/core/constants/theme';
 
-type THEME_MODE = 'dark' | 'light';
+type THEME_MODE = (typeof THEME)['DARK' | 'LIGHT'];
 
 type themeValueProps = {
   theme: THEME_MODE;
@@ -14,7 +15,7 @@ const defaultValue: themeValueProps = {
 };
 
 export const Theme = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<'dark' | 'light'>('light');
+  const [theme, setTheme] = useState<THEME_MODE>(THEME.LIGHT);
 
   const value: themeValueProps = {
     theme,
@@ -24,7 +25,7 @@ export const Theme = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const theme = getLS(LS_KEYS.THEME);
 
-    if (theme === 'dark' || theme === 'light') return setTheme(theme);
+    if (theme === THEME.DARK || theme === THEME.LIGHT) return setTheme(theme);
 
     setTheme('light');
   }, []);

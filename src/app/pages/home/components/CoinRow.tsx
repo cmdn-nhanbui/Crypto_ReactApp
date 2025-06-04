@@ -101,9 +101,7 @@ export const CoinRow = memo(({ index, data }: { index: number; data: CoinProps }
           <div className='flex flex-col 2lg:flex-row items-start'>
             <div className='font-semibold text-sm leading-5'>
               {data?.name}
-              <div className='block 2lg:inline text-xs leading-4 text-gray-500 dark:text-moon-200 font-medium'>
-                {data?.symbol}
-              </div>
+              <div className='block 2lg:inline text-xs leading-4 text-gray-500 font-medium'>{data?.symbol}</div>
             </div>
           </div>
         </Link>

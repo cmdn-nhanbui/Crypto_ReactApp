@@ -58,7 +58,7 @@ export const Sidebar = ({ data, isLoading = true }: { data?: CoinDetailData; isL
               </h1>
 
               <span className='mt-0.5 mr-3 2lg:mr-0 inline-flex items-center px-1.5 py-0.5 bg-gray-100 rounded-md'>
-                <div className='text-xs leading-4 text-gray-700 dark:text-moon-200 font-medium'>#65</div>
+                <div className='text-xs leading-4 text-gray-700 font-medium'>#65</div>
               </span>
             </div>
 
@@ -71,7 +71,7 @@ export const Sidebar = ({ data, isLoading = true }: { data?: CoinDetailData; isL
               </div>
             </div>
 
-            <div className='mb-3 text-xs leading-4 text-[var(--text-secondary)] dark:text-moon-200 font-regular'>
+            <div className='mb-3 text-xs leading-4 text-[var(--text-secondary)] font-regular'>
               <div className='flex gap-2'>
                 <span>{data?.currentPriceBTC} BTC</span>
                 <DeltaBadge value={Number(data?.change24hBTC)} />

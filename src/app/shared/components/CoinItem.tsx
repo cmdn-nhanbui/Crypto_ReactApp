@@ -15,7 +15,7 @@ export const CoinItem = ({ id, thumbnail, title, currentPrice, percent }: CoinIt
       <div className='flex justify-between px-2 py-2.5 hover:bg-[var(--background-secondary)] rounded-lg'>
         <div className='flex items-center gap-x-2 max-w-[50%]'>
           <img alt={title} className='rounded-full' src={thumbnail} width='24' height='24' />
-          <div className='block truncate text-gray-500 dark:text-moon-200'>
+          <div className='block truncate text-gray-500'>
             <span className='text-[var(--text-primary)]  font-semibold text-sm leading-5'>{title}</span>
           </div>
         </div>
