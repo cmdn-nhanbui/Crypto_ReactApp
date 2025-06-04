@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import type { SearchItemProps } from '@/core/constants/types';
 
-export const SearchItem = ({ id, name, thumbnail, symbol }: SearchItemProps) => {
+export const SearchItem = ({ id, name, thumbnail, symbol, onClick }: SearchItemProps) => {
   return (
-    <li className='search-result-item'>
+    <li onClick={onClick} className='search-result-item'>
       <Link to={`/coin/${id}`} className='flex justify-between px-2 py-3 rounded-lg hover:bg-[var(--background-hover)]'>
         <div className='flex items-center'>
           <img src={thumbnail} alt={name} className='w-6 mr-2' loading='lazy' />

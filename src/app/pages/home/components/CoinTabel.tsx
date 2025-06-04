@@ -11,7 +11,6 @@ import { useRealTimeCoinData } from '@/core/services/coin.service';
 
 import { ROUTES } from '@/core/constants/routes';
 import { COIN_TABLE_FIELDS } from '@/core/constants/fields';
-// import { getCoinsData } from '@/core/services/coin.service';
 
 export type SortKey = (typeof COIN_TABLE_FIELDS)[number]['ID'];
 

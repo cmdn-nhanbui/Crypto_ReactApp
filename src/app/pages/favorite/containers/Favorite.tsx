@@ -52,6 +52,7 @@ const Favorite = () => {
 
   //TODO Scroll to top in first time
   useEffect(() => {
+    document.title = 'Favorite';
     window.scrollTo(0, 0);
   }, []);
 

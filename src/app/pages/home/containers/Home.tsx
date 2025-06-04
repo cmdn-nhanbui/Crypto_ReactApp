@@ -5,6 +5,7 @@ import { HighLightSection } from '../components/HighLightSection';
 
 const Home = () => {
   useEffect(() => {
+    document.title = 'Coingecko';
     window.scrollTo(0, 0);
   }, []);
 
