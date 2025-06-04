@@ -1,11 +1,13 @@
-import { SearchOutlined } from '@ant-design/icons';
-import { SearchPopper } from './SearchPopper';
 import { useEffect, useRef, useState, type ChangeEvent } from 'react';
+
+import { SearchOutlined } from '@ant-design/icons';
+import { Spinner } from '../Spinner';
+import { SearchPopper } from './SearchPopper';
+import { type SearchItemProps } from '@/core/constants/types';
+
 import { useDebounce } from '@/shared/hooks/useDebounce';
 import { useSearchCoin } from '@/core/services/coin.service';
-import { type SearchItemProps } from '@/core/constants/types';
 import { mapSearchResultData } from '@/core/mappers/coin.mapper';
-import { Spinner } from '../Spinner';
 
 export const Search = () => {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -21,10 +23,14 @@ export const Search = () => {
     setShowPopper(true);
   };
 
+  const handleClosePopper = () => {
+    setShowPopper(false);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
-        setShowPopper(false);
+        handleClosePopper();
         setSearchValue('');
         setSearchResult([]);
         setNotFound(false);
@@ -68,7 +74,7 @@ export const Search = () => {
 
       {showPopper && (
         <div className='absolute top-full mt-2 right-0 sm:w-[460px] w-full'>
-          <SearchPopper isNotFound={notFound} searchData={searchResult} />
+          <SearchPopper onClose={handleClosePopper} isNotFound={notFound} searchData={searchResult} />
         </div>
       )}
     </div>

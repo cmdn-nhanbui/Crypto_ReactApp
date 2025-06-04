@@ -16,6 +16,9 @@ const Coin = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  if (data) {
+    document.title = data?.name;
+  }
   if (isError) {
     if (axios.isAxiosError(error)) {
       const status = error.response?.status;

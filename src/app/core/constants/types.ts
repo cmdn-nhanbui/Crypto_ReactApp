@@ -132,7 +132,9 @@ export type SkeletonProps = {
   className?: string;
 };
 
-export type SearchItemProps = Pick<CoinDetailData, 'id' | 'name' | 'symbol' | 'thumbnail'>;
+export type SearchItemProps = Pick<CoinDetailData, 'id' | 'name' | 'symbol' | 'thumbnail'> & {
+  onClick?: () => void;
+};
 
 export type UseCoinsDataParams = {
   page: number;

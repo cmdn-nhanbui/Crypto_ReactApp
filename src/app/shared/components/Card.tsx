@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+
 import { RightOutlined } from '@ant-design/icons';
 import { Skeleton } from './Skeleton';
 

@@ -4,6 +4,7 @@ import { Button } from '@/shared/components/Button';
 import { ROUTES } from '@/core/constants/routes';
 
 import type { ErrorProps } from '@/core/constants/types';
+import { useEffect } from 'react';
 
 export const Error = ({
   title,
@@ -12,6 +13,10 @@ export const Error = ({
   navigateTo = ROUTES.ROOT,
   navigateTitle = 'Go to home page',
 }: ErrorProps) => {
+  useEffect(() => {
+    document.title = String(status);
+  }, []);
+
   return (
     <div className='notfound container'>
       <div className='notfound-404'>
