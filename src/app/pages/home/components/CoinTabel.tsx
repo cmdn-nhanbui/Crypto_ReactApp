@@ -13,7 +13,7 @@ import { ROUTES } from '@/core/constants/routes';
 import { COIN_TABLE_FIELDS } from '@/core/constants/fields';
 // import { getCoinsData } from '@/core/services/coin.service';
 
-export type SortKey = (typeof COIN_TABLE_FIELDS)[number]['id'];
+export type SortKey = (typeof COIN_TABLE_FIELDS)[number]['ID'];
 
 export type SortConfig = {
   key: SortKey;
@@ -86,9 +86,9 @@ export const CoinTabel = () => {
                 <th
                   key={index}
                   className='cursor-pointer px-6 py-3 text-left text-sm font-medium'
-                  onClick={() => handleSort(field.id)}
+                  onClick={() => handleSort(field.ID)}
                 >
-                  {field.NAME} {field?.id && getArrow(field?.id)}
+                  {field.NAME} {field?.ID && getArrow(field?.ID)}
                 </th>
               ))}
             </tr>
