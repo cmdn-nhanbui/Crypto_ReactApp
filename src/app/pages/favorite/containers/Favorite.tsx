@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CaretDownOutlined, CaretUpOutlined, StarFilled } from '@ant-design/icons';
 
 import { type SortConfig, type SortKey } from '@/pages/home/components/CoinTabel';
@@ -6,42 +7,52 @@ import { PerPageSelector } from '@/shared/components/PerPageSelector';
 import Pagination from '@/shared/components/Pagination';
 import { FavoriteItem } from '../components/FavoriteItem';
 
+import { SORT_DIRECTION, sortFavoriteCoins } from '@/core/helpers/favoriteCoin.helper';
 import { useStorage } from '@/shared/hooks/useStorage';
 import { type FavoriteCoin } from '@/core/constants/types';
-import { sortFavoriteCoins } from '@/core/helpers/favoriteCoin.helper';
 import { getPaginationData } from '@/core/helpers/pagination.helper';
 import { FAVORITE_TABEL_FIELDS } from '@/core/constants/fields';
 
 const Favorite = () => {
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+
   const { favoriteCoins } = useStorage();
-  const [page, setPage] = useState<number>(1);
+  const page = Number(queryParams.get('page')) || 1;
   const [perPage, setPerPage] = useState<number>(10);
   const totalPage = Math.ceil(favoriteCoins?.length / perPage);
 
   const getArrow = (key: SortKey) => {
     if (sortConfig.key !== key) return <CaretDownOutlined />;
-    return sortConfig.direction === 'asc' ? <CaretUpOutlined /> : <CaretDownOutlined />;
+    return sortConfig.direction === SORT_DIRECTION.ASC ? <CaretUpOutlined /> : <CaretDownOutlined />;
   };
 
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     key: 'price',
-    direction: 'desc',
+    direction: SORT_DIRECTION.DESC,
   });
 
   //TODO Change sort mode
   const handleSort = (key: SortKey) => {
     setSortConfig((prev) =>
-      prev.key === key ? { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' } : { key, direction: 'asc' },
+      prev.key === key
+        ? { key, direction: prev.direction === SORT_DIRECTION.ASC ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC }
+        : { key, direction: SORT_DIRECTION.ASC },
     );
   };
 
-  const handleChangePage = (pageChange: number) => setPage(pageChange);
+  const handleChangePage = (pageNumber: number) => {
+    const newParams = new URLSearchParams(location.search);
+    newParams.set('page', String(pageNumber)); // chỉ thay đổi param page
+    navigate(`?${newParams.toString()}`);
+  };
+
   const handleChangePerPage = (perPage: number) => {
     setPerPage(perPage);
     const start = (page - 1) * perPage;
 
     if (start >= favoriteCoins.length || page < 1) {
-      setPage(1);
+      handleChangePage(1);
     }
   };
 
@@ -49,6 +60,8 @@ const Favorite = () => {
   let paginationCoins = sortFavoriteCoins(String(sortConfig.key), sortConfig.direction, favoriteCoins);
   // Sorting coins
   paginationCoins = getPaginationData<FavoriteCoin>(page, perPage, paginationCoins);
+
+  const offset = (page - 1) * perPage;
 
   //TODO Scroll to top in first time
   useEffect(() => {
@@ -66,9 +79,6 @@ const Favorite = () => {
           }}
         />
         <h3 className='sm:text-2xl text:base font-semibold text-[var(--text-primary)] ml-2'>My Favorite Coins</h3>
-        <span className='ml-2 bg-[var(--background-secondary)] text-xs rounded-lg flex py-1 px-2 h-fit text-[var(--text-secondary)]'>
-          Default
-        </span>
       </div>
 
       <div className='sm:hidden flex justify-end my-2'>
@@ -94,7 +104,7 @@ const Favorite = () => {
           </thead>
           <tbody className='divide-y divide-gray-200'>
             {paginationCoins?.map((item, index) => (
-              <FavoriteItem key={index} data={item} index={index + 1} />
+              <FavoriteItem key={index} data={item} index={index + offset + 1} />
             ))}
           </tbody>
         </table>

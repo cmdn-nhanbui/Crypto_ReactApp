@@ -36,7 +36,7 @@ export const FAVORITE_TABEL_FIELDS = [
 export const COIN_TABLE_FIELDS = [
   {
     NAME: 'Coin',
-    ID: 'coin_name',
+    ID: 'name',
   },
   {
     NAME: 'Price',

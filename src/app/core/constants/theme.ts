@@ -15,4 +15,6 @@ export const THEME = {
     },
     ROUNDED: 'rounded-lg',
   },
-};
+  DARK: 'dark',
+  LIGHT: 'light',
+} as const;

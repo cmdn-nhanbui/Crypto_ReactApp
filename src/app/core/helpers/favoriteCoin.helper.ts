@@ -11,11 +11,14 @@ const sortKeyMap: Record<string, keyof FavoriteCoin> = {
   market_cap: 'marketCap',
 };
 
-export const sortFavoriteCoins = (
-  sortKey: string,
-  direction: 'asc' | 'desc',
-  coins: FavoriteCoin[],
-): FavoriteCoin[] => {
+export const SORT_DIRECTION = {
+  ASC: 'asc',
+  DESC: 'desc',
+} as const;
+
+export type SortDirection = (typeof SORT_DIRECTION)[keyof typeof SORT_DIRECTION];
+
+export const sortFavoriteCoins = (sortKey: string, direction: SortDirection, coins: FavoriteCoin[]): FavoriteCoin[] => {
   const actualKey = sortKeyMap[sortKey];
 
   if (!actualKey) return coins;
@@ -25,11 +28,11 @@ export const sortFavoriteCoins = (
     const valueB = b[actualKey];
 
     if (typeof valueA === 'string' && typeof valueB === 'string') {
-      return direction === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+      return direction === SORT_DIRECTION.ASC ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
     }
 
     if (typeof valueA === 'number' && typeof valueB === 'number') {
-      return direction === 'asc' ? valueA - valueB : valueB - valueA;
+      return direction === SORT_DIRECTION.ASC ? valueA - valueB : valueB - valueA;
     }
 
     return 0;

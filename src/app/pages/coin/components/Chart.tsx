@@ -21,7 +21,7 @@ import { DeltaBadge } from '@/shared/components/DeltaBadge';
 // import { coinHistory, coinHistoryOneDay } from '../data/data.sample';
 import { formatHistoryChart, formatUSPrice } from '@/core/helpers/coin.helper';
 import { formatDays, formatHours } from '@/core/helpers/time.helper';
-import { useCoinHistory } from '@/core/services/coin.service';
+import { useCoinHistory } from '@/shared/hooks/useCoins';
 
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Filler, Tooltip, Legend);
 
@@ -189,12 +189,11 @@ export const Chart = ({ coinData }: ChartProps) => {
         <table className='min-w-full table-auto border border-[var(--border-primary)]'>
           <thead className='bg-[var(--background-secondary)] text-[var(--text-primary)]'>
             <tr>
-              <th className='cursor-pointer px-6 py-3 text-left text-sm font-medium'>1h</th>
-              <th className='cursor-pointer px-6 py-3 text-left text-sm font-medium'>24h</th>
-              <th className='cursor-pointer px-6 py-3 text-left text-sm font-medium'>7d</th>
-              <th className='cursor-pointer px-6 py-3 text-left text-sm font-medium'>14d</th>
-              <th className='cursor-pointer px-6 py-3 text-left text-sm font-medium'>30d</th>
-              <th className='cursor-pointer px-6 py-3 text-left text-sm font-medium'>1y</th>
+              {['1h', '24h', '7d', '14d', '30d', '1y'].map((item) => (
+                <th key={item} className='cursor-pointer px-6 py-3 text-sm font-medium text-center'>
+                  {item}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody className='divide-y divide-gray-200'>
