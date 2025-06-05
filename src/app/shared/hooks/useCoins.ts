@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import request from '../../core/services/api.service';
+import request from '@/core/services/api.service';
 
 import type { CoinProps } from '@/pages/home/components/CoinRow';
-import type { CoinDetailData, UseCoinsDataParams } from '../../core/constants/types';
-import { mapApiCoinToComponent, mapCoinDetailData } from '../../core/mappers/coin.mapper';
-import { QUERY_KEYS } from '../../core/constants/queryKeys';
+import type { CoinDetailData, UseCoinsDataParams } from '@/core/constants/types';
+import { mapApiCoinToComponent, mapCoinDetailData } from '@/core/mappers/coin.mapper';
+import { QUERY_KEYS } from '@/core/constants/queryKeys';
 
 const TOTAL_RECORD = 17241;
+const realTimeApiUrl = import.meta.env.VITE_REAL_TIME_API_URL;
+console.log(realTimeApiUrl);
 
 export const getCoinsData = async ({
   page,
@@ -88,7 +90,7 @@ export const useRealTimeCoinData = ({
   return useQuery({
     queryKey: [QUERY_KEYS.COIN_REAL_TIME, page, perPage, sortBy],
     queryFn: async () => {
-      const res = await request.get(`http://localhost:3001/coins`, {
+      const res = await request.get(String(realTimeApiUrl), {
         params: {
           page: page,
           per_page: perPage,

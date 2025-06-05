@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { TOAST_TYPES, type ToastContainerProps } from '../../core/constants/types';
+import { TOAST_TYPES, type ToastContainerProps } from '@/core/constants/types';
 import { Icon } from './Icons';
 
 const ToastContainer: React.FC<ToastContainerProps> = ({ toasts }) => {
