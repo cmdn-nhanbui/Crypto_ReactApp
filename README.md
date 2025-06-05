@@ -1,54 +1,116 @@
-# React + TypeScript + Vite
+# 🚀 Crypto React App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a boilerplate for quickly starting a React application using Vite and TypeScript. It’s designed for high performance and modern development.
 
-Currently, two official plugins are available:
+## 🧱 Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
 
-## Expanding the ESLint configuration
+## 📦 System Requirements
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [Node.js](https://nodejs.org/) v16 or higher (LTS recommended)
+- [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/cmdn-nhanbui/Crypto_ReactApp
+cd Crypto_ReactApp
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
 ```
+
+This command installs all required packages listed in `package.json`.
+
+### 3. Start the development server
+
+```bash
+npm start
+```
+
+If `npm start` is not defined in `package.json`, use:
+
+```bash
+npm run dev
+```
+
+This will start the Vite development server at [http://localhost:3000](http://localhost:5173).
+
+## 🛠 Useful Scripts
+
+| Command           | Description                          |
+| ----------------- | ------------------------------------ |
+| `npm install`     | Install project dependencies         |
+| `npm start`       | Alias to `npm run dev`               |
+| `npm run dev`     | Start the development server (Vite)  |
+| `npm run build`   | Build the app for production         |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint`    | Lint the code using ESLint           |
+| `npm run format`  | Format code using Prettier           |
+
+## 📁 Project Structure
+
+```bash
+.
+├── public/                  # Static public assets (if any)
+├── dist/                    # Build output directory
+├── src/                     # Main source code
+│   ├── App.tsx             # Root component
+│   ├── main.tsx            # App entry point
+│   ├── index.css           # Global CSS
+│   ├── assets/             # Images, SVGs, icons, etc.
+│   ├── app/                # Core logic & application-level routes
+│   │   ├── app.route.ts   # Top-level route config
+│   │   ├── core/          # Utilities, constants, and services
+│   │   ├── pages/         # Feature-based page modules (home, coin, error...)
+│   │   ├── shared/        # Reusable components, contexts, hooks, layout
+│   │   └── page.routes.ts # Aggregated route file
+│   ├── mocks/              # Mock data using Mock Service Worker (MSW)
+│   ├── stylesheet/         # SCSS and CSS for theming and layout
+│   └── vite-env.d.ts       # Type definitions for Vite environment
+├── .env                     # Environment variables
+├── .gitignore               # Files ignored by Git
+├── .prettierrc              # Prettier configuration
+├── eslint.config.js         # ESLint configuration
+├── package.json             # Project metadata and scripts
+├── tsconfig*.json           # TypeScript configuration files
+├── tailwind.config.ts       # TailwindCSS configuration
+├── vite.config.ts           # Vite configuration
+├── index.html               # Main HTML template
+└── README.md                # Project documentation
+
+```
+
+## ✅ Suggestions for Improvement
+
+- Add **React Router** for routing
+- Integrate **State management** (Redux, Zustand, or Context API)
+- Set up **CI/CD** with GitHub Actions
+- Add **Unit Testing** with Vitest or Jest
+
+## 🔧 Optional: Add `npm start` Alias
+
+To enable `npm start`, add the following to your `package.json`:
+
+```json
+"scripts": {
+  "start": "vite",
+  "build": "tsc -b && vite build",
+  "lint": "eslint .",
+  "preview": "vite preview"
+},
+```
+
+## 📄 License
+
+MIT © 2025 [cmdn - Nhan Bui T.]
