@@ -33,9 +33,7 @@ export const FavoriteItem = ({ data, index }: Props) => {
       <td className='px-1 py-2.5 bg-inherit'>
         <Link className='flex items-center w-full' to={`/coin/${data?.id}`}>
           <img className='mr-2 !h-6 w-6 object-fill' src={data?.thumbnail} alt={data?.name} />
-          <div className='flex flex-col items-start'>
-            <div className='font-semibold text-sm leading-5'>{data?.name}</div>
-          </div>
+          <div className='font-semibold text-sm leading-5 max-w-[100px] truncate'>{data?.name}</div>
         </Link>
       </td>
 

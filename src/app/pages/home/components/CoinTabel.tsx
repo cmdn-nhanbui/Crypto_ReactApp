@@ -29,9 +29,17 @@ export const CoinTabel = () => {
   const [totalRecord, setTotalRecord] = useState<number>(0);
   const page = Number(queryParams.get('page')) || 1;
 
+  const offset = (page - 1) * perPage;
+
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     key: 'price',
     direction: SORT_DIRECTION.ASC,
+  });
+
+  const { data, isLoading, error } = useRealTimeCoinData({
+    page,
+    perPage,
+    sortBy: `${sortConfig.key}_${sortConfig.direction}`,
   });
 
   const handleSort = (key: SortKey) => {
@@ -59,12 +67,6 @@ export const CoinTabel = () => {
     setPerPage(limit);
     scrollToTop();
   };
-
-  const { data, isLoading, error } = useRealTimeCoinData({
-    page,
-    perPage,
-    sortBy: `${sortConfig.key}_${sortConfig.direction}`,
-  });
 
   const getArrow = (key: SortKey) => {
     if (sortConfig.key !== key) return <CaretDownOutlined />;
@@ -109,7 +111,7 @@ export const CoinTabel = () => {
             {isLoading ? (
               <TableBodySkeleton />
             ) : (
-              data?.coins?.map((item, index) => <CoinRow key={index} index={index + 1} data={item} />)
+              data?.coins?.map((item, index) => <CoinRow key={index} index={index + offset + 1} data={item} />)
             )}
           </tbody>
         </table>
