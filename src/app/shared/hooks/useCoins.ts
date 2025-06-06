@@ -6,9 +6,8 @@ import type { CoinDetailData, UseCoinsDataParams } from '@/core/constants/types'
 import { mapApiCoinToComponent, mapCoinDetailData } from '@/core/mappers/coin.mapper';
 import { QUERY_KEYS } from '@/core/constants/queryKeys';
 
-const TOTAL_RECORD = 17241;
+const TOTAL_RECORD = 17282;
 const realTimeApiUrl = import.meta.env.VITE_REAL_TIME_API_URL;
-console.log(realTimeApiUrl);
 
 export const getCoinsData = async ({
   page,

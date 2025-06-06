@@ -7,7 +7,7 @@ import Pagination from '@/shared/components/Pagination';
 import { TableBodySkeleton } from './TableSkeleton';
 import { CoinRow } from './CoinRow';
 
-import { useRealTimeCoinData } from '@/shared/hooks/useCoins';
+import { useCoinsData } from '@/shared/hooks/useCoins';
 
 import { ROUTES } from '@/core/constants/routes';
 import { COIN_TABLE_FIELDS } from '@/core/constants/fields';
@@ -36,7 +36,7 @@ export const CoinTabel = () => {
     direction: SORT_DIRECTION.ASC,
   });
 
-  const { data, isLoading, error } = useRealTimeCoinData({
+  const { data, isLoading, error } = useCoinsData({
     page,
     perPage,
     sortBy: `${sortConfig.key}_${sortConfig.direction}`,
@@ -86,8 +86,8 @@ export const CoinTabel = () => {
   if (error) return <Navigate to={ROUTES.SERVER_ERROR} />;
 
   return (
-    <>
-      <div className='sm:hidden my-2 justify-end flex'>
+    <section className='mt-2 sm:mt-4'>
+      <div className='sm:hidden my-3 justify-end flex'>
         <PerPageSelector perPage={perPage} onChange={handleChangePerPage} options={[50, 100, 300]} />
       </div>
       <div ref={topRef} className='overflow-x-auto'>
@@ -124,6 +124,6 @@ export const CoinTabel = () => {
           <PerPageSelector perPage={perPage} onChange={handleChangePerPage} options={[50, 100, 300]} />
         </div>
       </div>
-    </>
+    </section>
   );
 };

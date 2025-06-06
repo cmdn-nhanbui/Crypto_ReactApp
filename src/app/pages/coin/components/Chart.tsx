@@ -18,27 +18,11 @@ import type { ChartProps, TimeRangeType } from '@/core/constants/types';
 import { TimeManagement } from '../components/TimeManagement';
 import { DeltaBadge } from '@/shared/components/DeltaBadge';
 
-// import { coinHistory, coinHistoryOneDay } from '../data/data.sample';
 import { formatHistoryChart, formatUSPrice } from '@/core/helpers/coin.helper';
-import { formatDays, formatHours } from '@/core/helpers/time.helper';
+import { formatDays, formatHours, formatTimeStamp } from '@/core/helpers/time.helper';
 import { useCoinHistory } from '@/shared/hooks/useCoins';
 
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Filler, Tooltip, Legend);
-
-// const getSampleData = (timeRange: TimeRangeType) => {
-//   let priceHistory = timeRange == '7d' ? coinHistory.prices : coinHistoryOneDay.prices;
-//   if (timeRange === '1h') priceHistory = priceHistory.slice(-12);
-
-//   const timeStamps: number[] = [];
-//   const prices: number[] = [];
-
-//   priceHistory?.forEach(([timestamp, price]) => {
-//     timeStamps.push(timestamp);
-//     prices.push(price);
-//   });
-
-//   return { timeStamps, prices };
-// };
 
 const timeRanges = {
   '1h': {
@@ -104,13 +88,12 @@ export const Chart = ({ coinData }: ChartProps) => {
           title: function (tooltipItems) {
             const index = tooltipItems[0].dataIndex;
             const rawTimestamp = timeStamps[index]; // lấy từ scope ngoài
-            const date = new Date(rawTimestamp);
-            const day = String(date.getUTCDate()).padStart(2, '0');
-            const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-            const year = date.getUTCFullYear();
-            const hour = String(date.getUTCHours()).padStart(2, '0');
-            const minute = String(date.getUTCMinutes()).padStart(2, '0');
-            return `${day}/${month}/${year} ${hour}:${minute} UTC`;
+            const { day, month, year, hours, minutes } = formatTimeStamp(rawTimestamp);
+
+            const formatHours = String(hours).padStart(2, '0');
+            const formatMinutes = String(minutes).padStart(2, '0');
+
+            return `${day}/${month}/${year} ${formatHours}:${formatMinutes}`;
           },
         },
       },

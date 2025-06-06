@@ -1,5 +1,5 @@
 import React from 'react';
-import clsx from 'clsx';
+import classNames from 'classnames';
 
 import { TOAST_TYPES, type ToastContainerProps } from '@/core/constants/types';
 import { Icon } from './Icons';
@@ -11,7 +11,7 @@ const ToastContainer: React.FC<ToastContainerProps> = ({ toasts }) => {
         return (
           <div key={toast.id} className='toast-item'>
             <div
-              className={clsx('check-container', {
+              className={classNames('check-container', {
                 'toast-error': toast.type === TOAST_TYPES.ERROR,
               })}
             >

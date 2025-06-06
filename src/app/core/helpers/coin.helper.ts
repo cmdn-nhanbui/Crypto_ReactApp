@@ -1,25 +1,5 @@
 import type { FormatHistoryResult } from '../constants/types';
 
-export const formatTimeStamp = (timestamp: number) => {
-  const date = new Date(timestamp);
-
-  return {
-    timestamp,
-    iso: date.toISOString(),
-    utcString: date.toUTCString(),
-    localString: date.toLocaleString(),
-    year: date.getFullYear(),
-    month: date.getMonth() + 1,
-    day: date.getDate(),
-    weekday: date.getDay(),
-    hours: date.getHours(),
-    minutes: date.getMinutes(),
-    seconds: date.getSeconds(),
-    milliseconds: date.getMilliseconds(),
-    timezoneOffsetMinutes: date.getTimezoneOffset(), // phút lệch UTC
-  };
-};
-
 export const formatUSPrice = (price: unknown): string => {
   if (typeof price !== 'number' || isNaN(price)) {
     return '-';
