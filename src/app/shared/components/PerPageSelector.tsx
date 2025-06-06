@@ -9,15 +9,9 @@ interface PerPageSelectorProps {
   perPage: number;
   onChange: (value: number) => void;
   options?: number[];
-  theme?: string;
 }
 
-export const PerPageSelector: React.FC<PerPageSelectorProps> = ({
-  perPage,
-  onChange,
-  options = [50, 100, 300],
-  theme = '',
-}) => {
+export const PerPageSelector: React.FC<PerPageSelectorProps> = ({ perPage, onChange, options = [50, 100, 300] }) => {
   return (
     <Popover>
       {({ close }) => (
@@ -33,21 +27,19 @@ export const PerPageSelector: React.FC<PerPageSelectorProps> = ({
           </PopoverButton>
 
           <PopoverPanel transition anchor='bottom end'>
-            <div className={theme}>
-              <MenuWrapper>
-                {options.map((item) => (
-                  <MenuItem
-                    onClick={() => {
-                      onChange(item);
-                      close();
-                    }}
-                    key={item}
-                  >
-                    {item}
-                  </MenuItem>
-                ))}
-              </MenuWrapper>
-            </div>
+            <MenuWrapper>
+              {options.map((item) => (
+                <MenuItem
+                  onClick={() => {
+                    onChange(item);
+                    close();
+                  }}
+                  key={item}
+                >
+                  {item}
+                </MenuItem>
+              ))}
+            </MenuWrapper>
           </PopoverPanel>
         </>
       )}

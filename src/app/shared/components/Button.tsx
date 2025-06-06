@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import classNames from 'classnames';
 import type { ButtonProps } from '@/core/constants/types';
 import { THEME } from '@/core/constants/theme';
 
@@ -13,7 +13,7 @@ export const Button = ({
   const colorClass = color ? THEME.BUTTON.COLOR[color] : '';
   const variantClass = variant ? THEME.BUTTON.VARIANT[variant] : '';
 
-  const buttonClasses = clsx(
+  const buttonClasses = classNames(
     THEME.BUTTON.BASE,
     variantClass,
     colorClass,

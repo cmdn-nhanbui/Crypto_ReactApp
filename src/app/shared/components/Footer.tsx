@@ -4,32 +4,9 @@ import { Button } from './Button';
 import { ROUTES } from '@/core/constants/routes';
 import { useTheme } from '../hooks/useTheme';
 
+import { FOOTER_MENUS } from '@/core/constants/fields';
 import logo from '@assets/images/coingecko-1.svg';
 import logoDrark from '@assets/images/coingecko-dark.svg';
-
-const footerMenus = [
-  {
-    title: 'Resources',
-    children: ['Crypto News', 'Bitcoin Treasury', 'Crypto Heatmap', 'Crypto API'],
-  },
-  {
-    title: 'Support',
-    children: ['Request Form', 'Advertising', 'Candy Rewards Listing', 'Help Center', 'Bug Bounty', 'FAQ'],
-  },
-  {
-    title: 'About CoinGecko',
-    children: [
-      'About Us',
-      'Careers',
-      'Branding Guide',
-      'Methodology',
-      'Terms of Service',
-      'Privacy Policy',
-      'Ad Policy',
-      'Cookie Preferences',
-    ],
-  },
-];
 
 export const Footer = () => {
   const { theme } = useTheme();
@@ -48,12 +25,12 @@ export const Footer = () => {
             </div>
           </section>
           <div className='col col-7 col-sm-12 flex mt-4 sm:mt-0 sm:flex-row flex-col sm:gap-0 gap-4'>
-            {footerMenus?.map((item, index) => (
+            {FOOTER_MENUS?.map((item, index) => (
               <nav className='flex-1' key={index} aria-label='Resources'>
-                <h2 className='text-sm text-[var(--text-gray)] font-semibold'>{item.title}</h2>
-                <ul className='mt-4 flex flex-col gap-4'>
+                <h2 className='text-[var(--text-gray)] text-md font-semibold'>{item.title}</h2>
+                <ul className='mt-3 flex flex-col gap-2'>
                   {item?.children?.map((childItem, index) => (
-                    <li className='text-[var(--text-secondary)] font-normal' key={index}>
+                    <li className='text-[var(--text-secondary)] font-normal text-sm' key={index}>
                       <a href='#'>{childItem}</a>
                     </li>
                   ))}

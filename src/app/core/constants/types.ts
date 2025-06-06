@@ -120,6 +120,7 @@ export type LineChartProps = {
 };
 
 export type MarketCardProps = {
+  title: string;
   value: number;
   percentageChange: number;
   chartData: number[];

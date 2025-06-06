@@ -32,7 +32,7 @@ export const CoinRow = memo(({ index, data }: { index: number; data: CoinProps }
 
   const { favoriteCoins, setFavoriteCoins } = useStorage();
   const [isLiked, setIsLiked] = useState<boolean>(favoriteCoins?.some((item) => item?.id === data?.id));
-  const debouncedIsLiked = useDebounce(isLiked, 1000);
+  const debouncedIsLiked = useDebounce<boolean>(isLiked, 1000);
 
   const priceRefElemet = useRef<HTMLTableCellElement>(null);
   const prevPriceRef = useRef<number>(data?.price);
