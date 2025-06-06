@@ -79,7 +79,7 @@ export const Header = ({}) => {
             <Button color='PRIMARY'>Sign up</Button>
           </div>
         </div>
-        <div className='py-2.5 header-bottom flex border-b border-[var(--border-primary)]'>
+        <div className='py-4 header-bottom flex border-b border-[var(--border-primary)]'>
           <Link to={ROUTES.ROOT}>
             <h1 className='h-10 cursor-pointer hidden lg:block'>
               <img src={theme === THEME.LIGHT ? logo : logoDark} className='h-full' alt='logo' />

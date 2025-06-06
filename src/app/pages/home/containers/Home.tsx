@@ -10,14 +10,9 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='container min-h-[calc(100vh-120px)] pt-4 '>
-      <section>
-        <HighLightSection />
-      </section>
-
-      <div className='mt-2 sm:mt-4'>
-        <CoinTabel />
-      </div>
+    <div className='container min-h-[calc(100vh-120px)] pt-5'>
+      <HighLightSection />
+      <CoinTabel />
     </div>
   );
 };

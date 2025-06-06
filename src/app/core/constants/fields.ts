@@ -72,3 +72,27 @@ export const COIN_TABLE_FIELDS = [
     NAME: 'Last 7 Days',
   },
 ];
+
+export const FOOTER_MENUS = [
+  {
+    title: 'Resources',
+    children: ['Crypto News', 'Bitcoin Treasury', 'Crypto Heatmap', 'Crypto API'],
+  },
+  {
+    title: 'Support',
+    children: ['Request Form', 'Advertising', 'Candy Rewards Listing', 'Help Center', 'Bug Bounty', 'FAQ'],
+  },
+  {
+    title: 'About CoinGecko',
+    children: [
+      'About Us',
+      'Careers',
+      'Branding Guide',
+      'Methodology',
+      'Terms of Service',
+      'Privacy Policy',
+      'Ad Policy',
+      'Cookie Preferences',
+    ],
+  },
+];

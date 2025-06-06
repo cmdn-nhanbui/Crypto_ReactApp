@@ -11,7 +11,7 @@ import { mapSearchResultData } from '@/core/mappers/coin.mapper';
 
 export const Search = () => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const debouncedValue = useDebounce(searchValue, 500);
+  const debouncedValue = useDebounce<string>(searchValue, 500);
   const [searchResult, setSearchResult] = useState<SearchItemProps[]>([]);
   const [notFound, setNotFound] = useState<boolean>(false);
   const [showPopper, setShowPopper] = useState<boolean>(false);

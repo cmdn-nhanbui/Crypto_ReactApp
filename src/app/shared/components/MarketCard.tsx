@@ -15,7 +15,7 @@ import type { MarketCardProps } from '@/core/constants/types';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip);
 
-const MarketCard: React.FC<MarketCardProps> = ({ value, percentageChange, chartData }) => {
+const MarketCard: React.FC<MarketCardProps> = ({ value, percentageChange, chartData, title }) => {
   const formattedValue = value.toLocaleString('de-DE');
 
   const data = {
@@ -54,7 +54,7 @@ const MarketCard: React.FC<MarketCardProps> = ({ value, percentageChange, chartD
       <div className='col col-7 flex flex-col justify-center'>
         <div className='text-lg font-semibold text-[var(--text-primary)] leading-[18px]'>${formattedValue}</div>
         <div className='text-sm text-[var(--text-secondary)] font-semibold flex items-center gap-2 mt-1'>
-          Market Cap
+          {title}
           <DeltaBadge value={percentageChange} />
         </div>
       </div>
